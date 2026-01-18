@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Variables & Constants Demo</title>
+</head>
+<body>
+
+<h2>JavaScript Variables and Constants Example</h2>
+
+<script>
+/* Variables */
+let university = "Graphic Era University"; // String
+let year = 2026;                           // Number
+let rating = 4.5;                          // Number
+let isPrivate = true;                      // Boolean
+let result;                                // Undefined
+let data = null;                           // Null
+
+let courses = ["CSE", "ECE", "ME"];        // Array
+let student = {                            // Object
+  name: "Ankit",
+  rollNo: 101
+};
+
+let uniqueId = Symbol("studentId");        // Symbol
+let bigValue = 9876543210123456789n;       // BigInt
+
+/* Constants */
+const PI = 3.14;
+const COLLEGE = "GEU";
+
+/* Output */
+document.write("<b>String:</b> " + university + "<br>");
+document.write("<b>Number:</b> " + year + "<br>");
+document.write("<b>Float:</b> " + rating + "<br>");
+document.write("<b>Boolean:</b> " + isPrivate + "<br>");
+document.write("<b>Undefined:</b> " + result + "<br>");
+document.write("<b>Null:</b> " + data + "<br>");
+document.write("<b>Array:</b> " + courses + "<br>");
+document.write("<b>Object:</b> " + student.name + ", " + student.rollNo + "<br>");
+document.write("<b>Symbol:</b> " + uniqueId.toString() + "<br>");
+document.write("<b>BigInt:</b> " + bigValue + "<br>");
+document.write("<b>Constant PI:</b> " + PI + "<br>");
+document.write("<b>Constant College:</b> " + COLLEGE + "<br>");
+</script>
+
+</body>
+</html>
+
