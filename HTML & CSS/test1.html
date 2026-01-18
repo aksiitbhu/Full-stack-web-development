@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Unit 1 Editable Teaching Sheet (HTML + CSS + Bootstrap)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --ok:#22c55e;
+      --info:#2563eb;
+      --warn:#f59e0b;
+      --dark:#0b1020;
+      --light:#f9fafb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    header{
+      background:#111827;
+      color:#fff;
+      padding:20px 16px;
+    }
+    header h1{margin:0 0 6px 0; font-size:20px;}
+    header p{margin:0; color:#cbd5e1; font-size:13px;}
+    .wrap{max-width:1200px; margin:16px auto; padding:0 14px 40px;}
+    .grid{display:grid; grid-template-columns:320px 1fr; gap:14px;}
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr;} }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:14px;
+      box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    }
+    .sticky{
+      position:sticky;
+      top:12px;
+      height: calc(100vh - 24px);
+      overflow:auto;
+    }
+    h2{font-size:16px; margin:0 0 10px 0;}
+    h3{font-size:14px; margin:16px 0 8px 0;}
+    .muted{color:var(--muted); font-size:13px;}
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--light);
+      margin:4px 6px 0 0;
+    }
+    .toc a{
+      display:block;
+      padding:7px 8px;
+      border-radius:10px;
+      color:#1d4ed8;
+      text-decoration:none;
+      font-size:13px;
+    }
+    .toc a:hover{background:#eef2ff;}
+    .note{
+      border-left:4px solid var(--info);
+      background:#eff6ff;
+      padding:10px 12px;
+      border-radius:10px;
+      margin:10px 0;
+      font-size:13px;
+    }
+    .ok{
+      border-left:4px solid var(--ok);
+      background:#ecfdf5;
+      padding:10px 12px;
+      border-radius:10px;
+      margin:10px 0;
+      font-size:13px;
+    }
+    .warn{
+      border-left:4px solid var(--warn);
+      background:#fffbeb;
+      padding:10px 12px;
+      border-radius:10px;
+      margin:10px 0;
+      font-size:13px;
+    }
+    .topic{
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      margin:12px 0;
+      background:#fff;
+    }
+    .topic-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .topic-title h3{margin:0;}
+    .tags{flex-shrink:0;}
+    .tags .pill{margin-top:0;}
+    .objectives ul, .steps ul{margin:6px 0 0 18px;}
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    @media (max-width: 980px){ .two{grid-template-columns:1fr;} }
+    textarea.code{
+      width:100%;
+      min-height:220px;
+      resize:vertical;
+      border-radius:12px;
+      border:1px solid var(--border);
+      padding:10px 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12.5px;
+      line-height:1.35;
+      background:#0b1020;
+      color:#e5e7eb;
+    }
+    .controls{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+    button{
+      cursor:pointer;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:8px 10px;
+      border-radius:10px;
+      font-size:13px;
+    }
+    button:hover{background:#f9fafb;}
+    .btn-primary{
+      border-color:#c7d2fe;
+      background:#eef2ff;
+    }
+    .btn-danger{
+      border-color:#fecaca;
+      background:#fff1f2;
+    }
+    .preview{
+      border:2px solid var(--ok);
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .preview-head{
+      background:var(--ok);
+      color:#fff;
+      padding:6px 10px;
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    iframe{
+      width:100%;
+      height:260px;
+      border:0;
+      background:#fff;
+    }
+    .mini{
+      font-size:12px;
+      color:#14532d;
+      background:#dcfce7;
+      border:1px solid #bbf7d0;
+      padding:2px 8px;
+      border-radius:999px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+    }
+    th, td{
+      border-bottom:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+      font-size:13px;
+    }
+    th{background:#f3f4f6; text-align:left;}
+    .footer{margin-top:16px; font-size:12px; color:var(--muted);}
+    .kbd{
+      border:1px solid var(--border);
+      border-bottom-width:2px;
+      border-radius:6px;
+      padding:1px 6px;
+      background:#fff;
+      font-size:12px;
+    }
+    .small{font-size:12px;}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Unit-1 Editable Teaching Sheet (HTML + CSS + Bootstrap) — 8–10 Hours</h1>
+  <p>Each topic has: learning goals → steps → editable code → Run → live output. (Offline friendly; Bootstrap preview needs internet for CDN.)</p>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- LEFT -->
+    <aside class="card sticky">
+      <h2>Navigation</h2>
+      <p class="muted small">
+        Suggested pacing: 8 sessions × ~60–75 min. Add optional extensions to reach 10 hours.
+      </p>
+
+      <div class="toc">
+        <a href="#plan">Hour-wise Plan (8–10 hrs)</a>
+        <a href="#t1">1) HTML Skeleton + Comments</a>
+        <a href="#t2">2) Text Formatting + Entities</a>
+        <a href="#t3">3) Links + Navigation</a>
+        <a href="#t4">4) Lists + Images</a>
+        <a href="#t5">5) Tables</a>
+        <a href="#t6">6) Forms + HTML5 Validation</a>
+        <a href="#t7">7) Meta Tags + Page Basics</a>
+        <a href="#t8">8) HTML5 Semantic Structure</a>
+        <a href="#t9">9) CSS Basics + Types + Selectors</a>
+        <a href="#t10">10) CSS Colors + Background + Text + Fonts</a>
+        <a href="#t11">11) Box Model (margin/padding/border)</a>
+        <a href="#t12">12) CSS Positioning</a>
+        <a href="#t13">13) Intro to Bootstrap + Responsive Cards</a>
+        <a href="#project">Mini Project (Portfolio/Club Page)</a>
+        <a href="#extensions">Optional Extensions</a>
+      </div>
+
+      <div class="note">
+        <b>Teaching Tip:</b> After each “Run”, ask students to change 2–3 lines and re-run.
+      </div>
+
+      <div class="controls">
+        <button class="btn-primary" onclick="runAll()">Run All</button>
+        <button onclick="collapseAll()">Collapse All Previews</button>
+        <button onclick="expandAll()">Expand All Previews</button>
+        <button onclick="window.print()">Print / Save PDF</button>
+      </div>
+
+      <div class="footer">
+        Use in projector mode. Students can copy/paste code into their own <span class="kbd">index.html</span>.
+      </div>
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="card">
+
+      <h2 id="plan">Hour-wise Plan (8–10 hours)</h2>
+      <table>
+        <tr><th>Hour</th><th>Topics</th><th>Hands-on Outcome</th></tr>
+        <tr><td>1</td><td>HTML skeleton, headings, paragraphs, comments</td><td>First webpage</td></tr>
+        <tr><td>2</td><td>Text formatting, entities, basic content</td><td>Formatted profile page</td></tr>
+        <tr><td>3</td><td>Links + navigation, lists, images</td><td>3-page mini site</td></tr>
+        <tr><td>4</td><td>Tables + forms + HTML5 validation</td><td>Registration form + table</td></tr>
+        <tr><td>5</td><td>Meta tags + HTML5 semantic structure</td><td>Semantic layout page</td></tr>
+        <tr><td>6</td><td>CSS basics, selectors, types of CSS</td><td>External CSS styling</td></tr>
+        <tr><td>7</td><td>Colors/background/text/fonts + box model</td><td>Card UI + spacing</td></tr>
+        <tr><td>8</td><td>Positioning + Bootstrap intro (responsive)</td><td>Responsive page layout</td></tr>
+        <tr><td>+1–2</td><td>Mini Project + viva + improvements</td><td>Portfolio/Club site ready</td></tr>
+      </table>
+
+      <div class="ok">
+        <b>Class deliverable:</b> Each student submits a folder with <code>index.html</code>, <code>css/style.css</code>, and images.
+      </div>
+
+      <!-- TOPIC TEMPLATE: goals + steps + editable code + preview -->
+      <!-- 1 -->
+      <section class="topic" id="t1">
+        <div class="topic-title">
+          <h3>1) HTML Skeleton + Comments</h3>
+          <div class="tags">
+            <span class="pill">Theory 10–12 min</span>
+            <span class="pill">Hands-on 15–20 min</span>
+          </div>
+        </div>
+
+        <div class="objectives">
+          <b>Learning goals:</b>
+          <ul>
+            <li>Understand HTML document structure: <code>&lt;html&gt; &lt;head&gt; &lt;body&gt;</code></li>
+            <li>Use headings and paragraphs</li>
+            <li>Write comments in HTML</li>
+          </ul>
+        </div>
+
+        <div class="steps">
+          <b>Experiment steps:</b>
+          <ul>
+            <li>Create <span class="kbd">index.html</span></li>
+            <li>Edit the code below and click <b>Run</b></li>
+          </ul>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My First Page</title>
+</head>
+<body>
+
+  <!-- This is a comment: visible in code, not on page -->
+  <h1>Welcome to HTML</h1>
+  <p>This is my first web page.</p>
+
+  <h2>About Me</h2>
+  <p>Name: ________ <br> Department: CSE</p>
+
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t1')">Run</button>
+              <button onclick="resetOne('t1')">Reset</button>
+              <button class="btn-danger" onclick="clearOne('t1')">Clear</button>
+              <span class="muted small">Try: change title, name, and headings.</span>
+            </div>
+          </div>
+
+          <div class="preview" id="prevWrap-t1">
+            <div class="preview-head">
+              <span>Output Preview</span>
+              <span class="mini">Live</span>
+            </div>
+            <iframe id="prev-t1"></iframe>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Explain:</b> Title shows on browser tab; comments are for developers; <code>&lt;br&gt;</code> creates line break.
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="topic" id="t2">
+        <div class="topic-title">
+          <h3>2) Text Formatting + Character Entities</h3>
+          <div class="tags">
+            <span class="pill">Theory 10 min</span>
+            <span class="pill">Hands-on 15–20 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Use formatting tags: <code>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;, &lt;mark&gt;, &lt;small&gt;</code></li>
+          <li>Use entities like <code>&amp;copy;</code>, <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code></li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t2">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Text Formatting</h2>
+  <p><b>Bold</b>, <i>Italic</i>, <u>Underline</u>, <mark>Highlight</mark>, <small>Small</small></p>
+
+  <h3>Entities</h3>
+  <p>Copyright: &copy; 2026</p>
+  <p>Less than: &lt; 10, Greater than: &gt; 5</p>
+  <p>Ampersand: Tom &amp; Jerry</p>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t2')">Run</button>
+              <button onclick="resetOne('t2')">Reset</button>
+              <span class="muted small">Try: add <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code>.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t2">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t2"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="topic" id="t3">
+        <div class="topic-title">
+          <h3>3) Hyperlinks + Navigation (Multi-Page Concept)</h3>
+          <div class="tags">
+            <span class="pill">Theory 10–12 min</span>
+            <span class="pill">Hands-on 20 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Create links with <code>&lt;a&gt;</code></li>
+          <li>Open link in new tab using <code>target="_blank"</code></li>
+          <li>Understand site navigation structure</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t3">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Navigation Example</h2>
+  <nav>
+    <a href="#">Home</a> |
+    <a href="#">About</a> |
+    <a href="#">Contact</a>
+  </nav>
+
+  <p>External Link:</p>
+  <a href="https://developer.mozilla.org" target="_blank">Open MDN Web Docs</a>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t3')">Run</button>
+              <button onclick="resetOne('t3')">Reset</button>
+              <span class="muted small">In real folder: make about.html, contact.html and link them.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t3">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t3"></iframe>
+          </div>
+        </div>
+
+        <div class="note">
+          <b>Class activity:</b> Ask students to create three files and connect using href: <code>index.html</code>, <code>about.html</code>, <code>contact.html</code>.
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="topic" id="t4">
+        <div class="topic-title">
+          <h3>4) Lists + Images</h3>
+          <div class="tags">
+            <span class="pill">Theory 8–10 min</span>
+            <span class="pill">Hands-on 15–20 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Ordered vs unordered lists</li>
+          <li>Images with <code>src</code>, <code>alt</code>, <code>width</code></li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t4">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Skills (Unordered List)</h2>
+  <ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>Bootstrap</li>
+  </ul>
+
+  <h2>Steps to Create a Webpage (Ordered List)</h2>
+  <ol>
+    <li>Create an HTML file</li>
+    <li>Write tags and content</li>
+    <li>Open in browser</li>
+  </ol>
+
+  <h2>Image Example</h2>
+  <p>Below is a sample image (online):</p>
+  <img src="https://via.placeholder.com/220x120.png?text=Sample+Image"
+       alt="Sample placeholder image" width="220">
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t4')">Run</button>
+              <button onclick="resetOne('t4')">Reset</button>
+              <span class="muted small">Try: break the image URL and see how alt helps.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t4">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t4"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="topic" id="t5">
+        <div class="topic-title">
+          <h3>5) Tables (Data Display)</h3>
+          <div class="tags">
+            <span class="pill">Theory 10 min</span>
+            <span class="pill">Hands-on 20 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Use table tags: <code>&lt;table&gt; &lt;tr&gt; &lt;th&gt; &lt;td&gt;</code></li>
+          <li>Understand header row vs data rows</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t5">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Marks Table</h2>
+  <table border="1" cellpadding="8">
+    <tr>
+      <th>Roll No</th>
+      <th>Name</th>
+      <th>HTML</th>
+      <th>CSS</th>
+    </tr>
+    <tr>
+      <td>01</td>
+      <td>Aman</td>
+      <td>18</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>02</td>
+      <td>Riya</td>
+      <td>19</td>
+      <td>18</td>
+    </tr>
+  </table>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t5')">Run</button>
+              <button onclick="resetOne('t5')">Reset</button>
+              <span class="muted small">Try: add one more student row.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t5">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t5"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="topic" id="t6">
+        <div class="topic-title">
+          <h3>6) Forms + HTML5 Validation</h3>
+          <div class="tags">
+            <span class="pill">Theory 12 min</span>
+            <span class="pill">Hands-on 25 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Create forms: text, email, password, date, radio, checkbox, select</li>
+          <li>HTML5 validation: <code>required</code>, <code>minlength</code>, <code>pattern</code></li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t6">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Student Registration Form</h2>
+
+  <form>
+    <label>Full Name:</label><br>
+    <input type="text" required minlength="3" placeholder="Enter your name"><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" required placeholder="name@example.com"><br><br>
+
+    <label>Password:</label><br>
+    <input type="password" required minlength="6"><br><br>
+
+    <label>Phone (10 digits):</label><br>
+    <input type="text" pattern="[0-9]{10}" placeholder="9999999999"><br><br>
+
+    <label>DOB:</label><br>
+    <input type="date"><br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="g" value="M"> Male
+    <input type="radio" name="g" value="F"> Female
+    <input type="radio" name="g" value="O"> Other
+    <br><br>
+
+    <label>Skills:</label><br>
+    <input type="checkbox" value="html"> HTML
+    <input type="checkbox" value="css"> CSS
+    <input type="checkbox" value="bs"> Bootstrap
+    <br><br>
+
+    <label>City:</label><br>
+    <select>
+      <option>Dehradun</option>
+      <option>Delhi</option>
+      <option>Other</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+  <p><small>Tip: Try submitting without name/email to see validation.</small></p>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t6')">Run</button>
+              <button onclick="resetOne('t6')">Reset</button>
+              <span class="muted small">Try: change pattern, add textarea, add required to DOB.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t6">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t6"></iframe>
+          </div>
+        </div>
+
+        <div class="warn">
+          <b>Explain:</b> HTML validation is client-side only; for real systems we also validate at server side.
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section class="topic" id="t7">
+        <div class="topic-title">
+          <h3>7) Meta Tags + Page Basics</h3>
+          <div class="tags">
+            <span class="pill">Theory 10 min</span>
+            <span class="pill">Hands-on 10–15 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Use <code>charset</code> and <code>viewport</code></li>
+          <li>Intro to SEO meta tags: <code>description</code>, <code>keywords</code> (concept)</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t7">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Demo page for Unit 1 HTML meta tags">
+  <meta name="keywords" content="HTML, CSS, Full Stack, Unit 1">
+  <title>Meta Tags Demo</title>
+</head>
+<body>
+  <h2>Meta Tags Demo</h2>
+  <p>Open DevTools → Elements → see &lt;meta&gt; tags in &lt;head&gt;.</p>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t7')">Run</button>
+              <button onclick="resetOne('t7')">Reset</button>
+              <span class="muted small">Try: change title and description content.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t7">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t7"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section class="topic" id="t8">
+        <div class="topic-title">
+          <h3>8) HTML5 Semantic Structure (Website Layout)</h3>
+          <div class="tags">
+            <span class="pill">Theory 12–15 min</span>
+            <span class="pill">Hands-on 20–25 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Use semantic tags: <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>aside</code>, <code>footer</code></li>
+          <li>Understand “website structure” concept</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t8">
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; margin:0;">
+  <header style="background:#111827; color:white; padding:14px;">
+    <h2 style="margin:0;">Department Club Portal</h2>
+    <nav style="margin-top:6px;">
+      <a href="#" style="color:#cbd5e1; margin-right:10px;">Home</a>
+      <a href="#" style="color:#cbd5e1; margin-right:10px;">Events</a>
+      <a href="#" style="color:#cbd5e1;">Register</a>
+    </nav>
+  </header>
+
+  <main style="display:flex; gap:12px; padding:14px;">
+    <section style="flex:2;">
+      <h3>Upcoming Events</h3>
+
+      <article style="border:1px solid #ddd; padding:10px; border-radius:10px; margin-bottom:10px;">
+        <h4 style="margin:0 0 6px;">HTML & CSS Workshop</h4>
+        <p style="margin:0;">Date: 15 Jan | Venue: Lab 6</p>
+      </article>
+
+      <article style="border:1px solid #ddd; padding:10px; border-radius:10px;">
+        <h4 style="margin:0 0 6px;">Hackathon</h4>
+        <p style="margin:0;">Date: 20 Jan | Venue: Auditorium</p>
+      </article>
+    </section>
+
+    <aside style="flex:1; border:1px solid #ddd; padding:10px; border-radius:10px; height:fit-content;">
+      <h3>Notice</h3>
+      <p>Registration closes 2 days before event.</p>
+    </aside>
+  </main>
+
+  <footer style="background:#f3f4f6; padding:10px; text-align:center;">
+    © 2026 Department of CSE
+  </footer>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t8')">Run</button>
+              <button onclick="resetOne('t8')">Reset</button>
+              <span class="muted small">Try: add one more event article.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t8">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t8"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9 -->
+      <section class="topic" id="t9">
+        <div class="topic-title">
+          <h3>9) CSS Basics + Types + Selectors</h3>
+          <div class="tags">
+            <span class="pill">Theory 15 min</span>
+            <span class="pill">Hands-on 20–25 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Understand CSS syntax: selector { property: value; }</li>
+          <li>Types: inline / internal / external (concept)</li>
+          <li>Selectors: element, class, id</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t9">
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Element selector */
+    h2 { color: #1d4ed8; }
+
+    /* Class selector */
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 10px;
+      background: #ffffff;
+    }
+
+    /* ID selector */
+    #special {
+      background: #fffbeb;
+      border-color: #f59e0b;
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS Selectors Demo</h2>
+
+  <div class="card">
+    <b>Card 1</b>
+    <p>This uses <code>.card</code> class.</p>
+  </div>
+
+  <div class="card" id="special">
+    <b>Card 2 (Special)</b>
+    <p>This uses both <code>.card</code> and <code>#special</code>.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t9')">Run</button>
+              <button onclick="resetOne('t9')">Reset</button>
+              <span class="muted small">Try: change colors, add one more class.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t9">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t9"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section class="topic" id="t10">
+        <div class="topic-title">
+          <h3>10) CSS Colors + Background + Text + Fonts</h3>
+          <div class="tags">
+            <span class="pill">Theory 10–12 min</span>
+            <span class="pill">Hands-on 20 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Colors (names, hex), background, font-family, font-size</li>
+          <li>Text alignment, spacing (line-height)</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t10">
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f7fb;
+      padding: 14px;
+    }
+    .banner{
+      background: #111827;
+      color: white;
+      padding: 14px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .para{
+      margin-top: 12px;
+      background: white;
+      padding: 12px;
+      border-radius: 12px;
+      color: #374151;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .highlight{ color:#1d4ed8; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <h2>CSS Styling Demo</h2>
+    <p>Colors, background, fonts</p>
+  </div>
+
+  <div class="para">
+    This paragraph uses <span class="highlight">custom font, size, and color</span>.
+    Try changing background and font size.
+  </div>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t10')">Run</button>
+              <button onclick="resetOne('t10')">Reset</button>
+              <span class="muted small">Try: change banner color and text alignment.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t10">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t10"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 -->
+      <section class="topic" id="t11">
+        <div class="topic-title">
+          <h3>11) CSS Box Model (Padding, Border, Margin)</h3>
+          <div class="tags">
+            <span class="pill">Theory 12–15 min</span>
+            <span class="pill">Hands-on 25 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Understand the box model</li>
+          <li>Use margin, padding, border, border-radius</li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t11">
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body{ font-family: Arial; background:#f6f7fb; padding:14px; }
+    .box{
+      background: white;
+      border: 3px solid #1d4ed8;
+      padding: 16px;          /* inside space */
+      margin: 14px;           /* outside space */
+      border-radius: 14px;
+    }
+    .box2{
+      background: #fffbeb;
+      border: 3px dashed #f59e0b;
+      padding: 10px;
+      margin: 14px;
+      border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Box Model Demo</h2>
+
+  <div class="box">
+    <b>Box 1</b>
+    <p>Change padding/margin and re-run.</p>
+  </div>
+
+  <div class="box2">
+    <b>Box 2</b>
+    <p>Try border styles: solid, dashed, dotted.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t11')">Run</button>
+              <button onclick="resetOne('t11')">Reset</button>
+              <span class="muted small">Ask: What happens when margin becomes 0?</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t11">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t11"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12 -->
+      <section class="topic" id="t12">
+        <div class="topic-title">
+          <h3>12) CSS Positioning (relative / absolute) — Basic</h3>
+          <div class="tags">
+            <span class="pill">Theory 12 min</span>
+            <span class="pill">Hands-on 20 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Understand normal flow vs positioned elements</li>
+          <li>Use <code>position: relative</code> and <code>position: absolute</code></li>
+        </ul>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t12">
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body{ font-family: Arial; background:#f6f7fb; padding:14px; }
+    .container{
+      position: relative;
+      height: 180px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .badge{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #22c55e;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Positioning Demo</h2>
+  <div class="container">
+    <div class="badge">NEW</div>
+    <h3>Card Title</h3>
+    <p>This badge is absolutely positioned inside a relative container.</p>
+    <p>Try changing top/right values.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t12')">Run</button>
+              <button onclick="resetOne('t12')">Reset</button>
+              <span class="muted small">Try: move badge to bottom-left.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t12">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t12"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 -->
+      <section class="topic" id="t13">
+        <div class="topic-title">
+          <h3>13) Bootstrap Intro + Responsive Cards (CDN)</h3>
+          <div class="tags">
+            <span class="pill">Theory 10–12 min</span>
+            <span class="pill">Hands-on 25 min</span>
+          </div>
+        </div>
+
+        <b>Learning goals:</b>
+        <ul>
+          <li>Why Bootstrap? Quick responsive UI</li>
+          <li>Use CDN, grid system: <code>container</code>, <code>row</code>, <code>col-*</code></li>
+        </ul>
+
+        <div class="warn">
+          <b>Note:</b> Bootstrap output needs internet to load CDN. If no internet, it will still show HTML but without Bootstrap styling.
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code" id="code-t13">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Bootstrap Demo</title>
+</head>
+<body>
+  <div class="container my-4">
+    <h2 class="mb-3">Responsive Cards</h2>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">HTML</h5>
+            <p class="card-text">Structure of web pages.</p>
+            <a href="#" class="btn btn-primary">Learn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">CSS</h5>
+            <p class="card-text">Styling and layouts.</p>
+            <a href="#" class="btn btn-primary">Learn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Bootstrap</h5>
+            <p class="card-text">Fast responsive UI.</p>
+            <a href="#" class="btn btn-primary">Learn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-3 text-muted">Try resizing the window to see responsiveness.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+            <div class="controls">
+              <button class="btn-primary" onclick="runOne('t13')">Run</button>
+              <button onclick="resetOne('t13')">Reset</button>
+              <span class="muted small">Try: change col-md-4 to col-md-6 and observe layout.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t13">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t13"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINI PROJECT -->
+      <section class="topic" id="project">
+        <div class="topic-title">
+          <h3>Mini Project (60–90 min): Student Portfolio / Department Club Page</h3>
+          <div class="tags">
+            <span class="pill">Assessment</span>
+            <span class="pill">Submission</span>
+          </div>
+        </div>
+
+        <div class="ok">
+          <b>Must include:</b>
+          <ul>
+            <li>Header + navigation (3 links)</li>
+            <li>At least 2 cards/articles</li>
+            <li>1 table (schedule/events/marks)</li>
+            <li>1 form (registration/contact) with <code>required</code></li>
+            <li>External CSS OR Bootstrap grid</li>
+          </ul>
+        </div>
+
+        <div class="note">
+          <b>Quick Viva (5 questions):</b>
+          <ol>
+            <li>What is difference between class and id?</li>
+            <li>Explain padding vs margin.</li>
+            <li>What is the use of alt attribute?</li>
+            <li>What is semantic HTML?</li>
+            <li>Why viewport meta tag is important?</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="topic" id="extensions">
+        <h3>Optional Extensions (Add 1–2 hours)</h3>
+        <ul>
+          <li><b>Extension A:</b> Add a gallery (6 images) + hover effects (<code>:hover</code>)</li>
+          <li><b>Extension B:</b> Create Bootstrap navbar + footer; keep consistent across pages</li>
+          <li><b>Extension C:</b> Style forms (focus, spacing, error message area)</li>
+          <li><b>Extension D:</b> Make a “card grid” using CSS flexbox (optional modern topic)</li>
+        </ul>
+        <div class="footer">
+          This editable sheet covers Unit-1 topics: HTML basics, formatting, comments, links, lists, tables, images, forms, meta tags, HTML5 semantic structure, CSS basics/selectors, colors/background, box model, positioning, Bootstrap intro.
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // Store defaults for reset
+  const defaults = {};
+
+  function escapeForSrcdoc(html) {
+    // srcdoc can take raw HTML string; we just return as-is.
+    // Keep this function in case you want extra sanitation later.
+    return html;
+  }
+
+  function initDefaults() {
+    document.querySelectorAll("textarea.code").forEach(t => {
+      defaults[t.id] = t.value;
+    });
+  }
+
+  function runOne(topicId) {
+    const ta = document.getElementById("code-" + topicId);
+    const fr = document.getElementById("prev-" + topicId);
+    if (!ta || !fr) return;
+
+    fr.srcdoc = escapeForSrcdoc(ta.value);
+  }
+
+  function resetOne(topicId) {
+    const ta = document.getElementById("code-" + topicId);
+    if (!ta) return;
+    ta.value = defaults[ta.id] ?? ta.value;
+    runOne(topicId);
+  }
+
+  function clearOne(topicId) {
+    const ta = document.getElementById("code-" + topicId);
+    if (!ta) return;
+    ta.value = "";
+    runOne(topicId);
+  }
+
+  function runAll() {
+    const topics = ["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13"];
+    topics.forEach(id => runOne(id));
+  }
+
+  function collapseAll() {
+    document.querySelectorAll(".preview").forEach(p => p.style.display = "none");
+  }
+
+  function expandAll() {
+    document.querySelectorAll(".preview").forEach(p => p.style.display = "block");
+  }
+
+  // Initialize
+  initDefaults();
+  runAll();
+</script>
+
+</body>
+</html>

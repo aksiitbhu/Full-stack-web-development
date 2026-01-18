@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML Tags Demonstration</title>
+</head>
+
+<body>
+
+<!-- Comment: BASIC TAGS  -->
+
+<h2>Basic Tags</h2>
+
+<p><strong>&lt;html&gt;</strong> tag defines the root of an HTML document.</p>
+<html>Root element example</html>
+
+<p><strong>&lt;head&gt;</strong> tag contains meta-information about the document.</p>
+<head>Head section example</head>
+
+<p><strong>&lt;body&gt;</strong> tag contains visible webpage content.</p>
+
+<p><strong>&lt;title&gt;</strong> tag sets the title shown in the browser tab.</p>
+<p>(Check browser tab for title)</p>
+
+<hr>
+
+<!-- ================= TEXT TAGS ================= -->
+
+<h2>Text Tags</h2>
+
+<p><strong>&lt;pre&gt;</strong> displays preformatted text.</p>
+<pre>
+New Arrivals
+Special Offers
+Bestsellers
+</pre>
+
+<p><strong>&lt;h1&gt;</strong> defines a main heading.</p>
+<h1>Welcome to Book Haven</h1>
+
+<p><strong>&lt;strong&gt;</strong> displays bold text.</p>
+<strong>Exclusive Sale</strong>
+
+<p><strong>&lt;em&gt;</strong> displays emphasized (italic) text.</p>
+<em>Must-read Classics</em>
+
+<p><strong>&lt;tt&gt;</strong> displays monospaced text.</p>
+<tt>ISBN: 978-3-16-148410-0</tt>
+
+<p><strong>&lt;code&gt;</strong> displays computer code.</p>
+<code>alert("Welcome to our bookstore!");</code>
+
+<p><strong>&lt;cite&gt;</strong> represents cited work.</p>
+<cite>by Jane Austen</cite>
+
+<p><strong>&lt;address&gt;</strong> displays contact information.</p>
+<address>123 Book St., Bibliopolis, BK 12345</address>
+
+<hr>
+
+<!-- ================= LINKS ================= -->
+
+<h2>Links</h2>
+
+<p><strong>&lt;a href&gt;</strong> creates a hyperlink.</p>
+<a href="https://www.amazon.in">Visit Our Store</a>
+
+<p><strong>&lt;a href=\"mailto\"&gt;</strong> creates an email link.</p>
+<a href="mailto:enquiry@geu.ac.in">Contact Us</a>
+
+<p><strong>&lt;a name&gt;</strong> defines an anchor.</p>
+<a name="section1"></a>
+
+<p><strong>&lt;a href=\"#\"&gt;</strong> links to an anchor.</p>
+<a href="#section1">Learn More</a>
+
+<hr>
+
+<!-- ================= FORMATTING ================= -->
+
+<h2>Formatting</h2>
+
+<p><strong>&lt;p&gt;</strong> defines a paragraph.</p>
+<p>Welcome to our online bookshop where you can find a wide selection of books.</p>
+
+<p><strong>&lt;br&gt;</strong> inserts a line break.</p>
+Line 1<br>Line 2
+
+<p><strong>&lt;blockquote&gt;</strong> displays a quotation.</p>
+<blockquote>
+"Reading is to the mind what exercise is to the body." – Joseph Addison
+</blockquote>
+
+<p><strong>&lt;div&gt;</strong> defines a section.</p>
+<div>Our Bestsellers</div>
+
+<p><strong>&lt;span&gt;</strong> defines inline content.</p>
+<span>Special Offer</span>
+
+<hr>
+
+<!-- ================= LISTS ================= -->
+
+<h2>Lists</h2>
+
+<p><strong>&lt;ul&gt;</strong> creates an unordered list.</p>
+<ul>
+  <li>Fiction</li>
+  <li>Non-Fiction</li>
+  <li>Children's Books</li>
+</ul>
+
+<p><strong>&lt;ol&gt;</strong> creates an ordered list with start attribute.</p>
+<ol start="2">
+  <li>Second Item</li>
+  <li>Third Item</li>
+</ol>
+
+<p><strong>&lt;dl&gt;</strong> creates a description list.</p>
+<dl>
+  <dt>Author</dt>
+  <dd>J.K. Rowling</dd>
+</dl>
+
+<hr>
+
+<!-- ================= GRAPHICS ================= -->
+
+<h2>Graphics</h2>
+
+<p><strong>&lt;hr&gt;</strong> creates a horizontal line.</p>
+<hr>
+
+<p><strong>&lt;hr size&gt;</strong> sets thickness.</p>
+<hr size="5">
+
+<p><strong>&lt;hr width&gt;</strong> sets width.</p>
+<hr width="50%">
+
+<p><strong>&lt;img&gt;</strong> displays an image.</p>
+<img src="https://via.placeholder.com/150" alt="Book Cover">
+
+<p><strong>Image with width, height, border</strong></p>
+<img src="https://via.placeholder.com/150" width="150" height="200" border="1" alt="Book Image">
+
+<hr>
+
+<!-- ================= FORMS ================= -->
+
+<h2>Forms</h2>
+
+<form action="#">
+<p><strong>Text Input</strong></p>
+<input type="text" name="name" size="20"><br><br>
+
+<p><strong>Checkbox</strong></p>
+<input type="checkbox" name="newsletter" value="subscribe"> Subscribe<br>
+
+<p><strong>Pre-checked Checkbox</strong></p>
+<input type="checkbox" checked> Already Subscribed<br><br>
+
+<p><strong>Select Dropdown</strong></p>
+<select name="genre">
+  <option>Fiction</option>
+  <option>Non-Fiction</option>
+</select><br><br>
+
+<p><strong>Multiple Select</strong></p>
+<select multiple size="3">
+  <option>Science</option>
+  <option>History</option>
+  <option>Technology</option>
+</select><br><br>
+
+<p><strong>Textarea</strong></p>
+<textarea cols="30" rows="5"></textarea><br><br>
+
+<input type="submit" value="Submit">
+<input type="reset">
+</form>
+
+<hr>
+
+<!-- ================= TABLES ================= -->
+
+<h2>Tables</h2>
+
+<table border="1">
+<tr>
+  <th>Book Title</th>
+  <th>Price</th>
+</tr>
+<tr>
+  <td>HTML Basics</td>
+  <td>₹499</td>
+</tr>
+</table>
+
+<hr>
+
+<!-- ================= VIDEO ================= -->
+
+<h2>Video</h2>
+
+<p><strong>&lt;video&gt;</strong> embeds a video.</p>
+<video width="300" controls>
+  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+</video>
+
+</body>
+</html>

@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GEU Unit-1 Teaching Sheet — Ashwini Singh</title>
+
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --ok:#16a34a;
+      --info:#2563eb;
+      --warn:#f59e0b;
+      --dark:#0b1020;
+      --light:#f9fafb;
+      --geu:#8b1d1d; /* maroon-ish */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    /* GEU Branding Header */
+    header{
+      background: linear-gradient(90deg, #111827 0%, #111827 55%, var(--geu) 100%);
+      color:#fff;
+      padding:18px 16px;
+      border-bottom: 4px solid rgba(255,255,255,0.15);
+    }
+    .brand{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      padding:0 8px;
+    }
+    .logo{
+      width:54px;
+      height:54px;
+      border-radius:12px;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.22);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      letter-spacing:0.5px;
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      line-height:1.2;
+    }
+    .brand p{
+      margin:4px 0 0 0;
+      color:#e5e7eb;
+      font-size:12.5px;
+    }
+    .rightBadge{
+      margin-left:auto;
+      text-align:right;
+      font-size:12.5px;
+      color:#e5e7eb;
+    }
+    .rightBadge b{color:#fff}
+    .wrap{
+      max-width:1200px;
+      margin:14px auto;
+      padding:0 14px 44px;
+    }
+
+    .grid{display:grid; grid-template-columns:320px 1fr; gap:14px;}
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr;} }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      box-shadow:0 1px 2px rgba(0,0,0,0.05);
+    }
+    .sticky{
+      position:sticky;
+      top:12px;
+      height: calc(100vh - 24px);
+      overflow:auto;
+    }
+    h2{font-size:16px; margin:0 0 10px 0;}
+    h3{font-size:14px; margin:14px 0 8px 0;}
+    .muted{color:var(--muted); font-size:13px;}
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:var(--light);
+      margin:4px 6px 0 0;
+    }
+    .toc a{
+      display:block;
+      padding:7px 8px;
+      border-radius:10px;
+      color:#1d4ed8;
+      text-decoration:none;
+      font-size:13px;
+    }
+    .toc a:hover{background:#eef2ff;}
+    .note{
+      border-left:4px solid var(--info);
+      background:#eff6ff;
+      padding:10px 12px;
+      border-radius:12px;
+      margin:10px 0;
+      font-size:13px;
+    }
+    .ok{
+      border-left:4px solid var(--ok);
+      background:#ecfdf5;
+      padding:10px 12px;
+      border-radius:12px;
+      margin:10px 0;
+      font-size:13px;
+    }
+    .warn{
+      border-left:4px solid var(--warn);
+      background:#fffbeb;
+      padding:10px 12px;
+      border-radius:12px;
+      margin:10px 0;
+      font-size:13px;
+    }
+    .topic{
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      margin:12px 0;
+      background:#fff;
+    }
+    .topic-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .topic-title h3{margin:0;}
+    .two{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;}
+    @media (max-width: 980px){ .two{grid-template-columns:1fr;} }
+
+    .tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:10px 0 8px 0;
+    }
+    button{
+      cursor:pointer;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:8px 10px;
+      border-radius:10px;
+      font-size:13px;
+    }
+    button:hover{background:#f9fafb;}
+    .btn-primary{
+      border-color:#c7d2fe;
+      background:#eef2ff;
+    }
+    .btn-danger{
+      border-color:#fecaca;
+      background:#fff1f2;
+    }
+    .btn-tab.active{
+      border-color:#93c5fd;
+      background:#dbeafe;
+    }
+
+    textarea.code{
+      width:100%;
+      min-height:240px;
+      resize:vertical;
+      border-radius:14px;
+      border:1px solid var(--border);
+      padding:10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12.5px;
+      line-height:1.35;
+      background:var(--dark);
+      color:#e5e7eb;
+      display:none; /* only active editor visible */
+    }
+    textarea.code.active{display:block;}
+
+    .controls{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+    }
+
+    .preview{
+      border:2px solid var(--ok);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .preview-head{
+      background:var(--ok);
+      color:#fff;
+      padding:7px 10px;
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    iframe{
+      width:100%;
+      height:290px;
+      border:0;
+      background:#fff;
+    }
+    .mini{
+      font-size:12px;
+      background:rgba(255,255,255,0.18);
+      border:1px solid rgba(255,255,255,0.22);
+      padding:2px 8px;
+      border-radius:999px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:10px 0;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+    }
+    th, td{
+      border-bottom:1px solid var(--border);
+      padding:10px;
+      vertical-align:top;
+      font-size:13px;
+    }
+    th{background:#f3f4f6; text-align:left;}
+    .kbd{
+      border:1px solid var(--border);
+      border-bottom-width:2px;
+      border-radius:6px;
+      padding:1px 6px;
+      background:#fff;
+      font-size:12px;
+    }
+    .footer{margin-top:14px; font-size:12px; color:var(--muted);}
+
+    details{border:1px dashed var(--border); border-radius:12px; padding:10px 12px; margin-top:10px; background:#fcfcff;}
+    summary{cursor:pointer; font-weight:bold;}
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">GEU</div>
+    <div>
+      <h1>Graphic Era University — Full Stack Web Development</h1>
+      <p>Unit–1: HTML & CSS (Teaching Sheet) • Department of CSE/IT • Instructor: <b>Ashwini Singh</b></p>
+    </div>
+    <div class="rightBadge">
+      <b>Ashwini Singh</b><br/>
+      <span>GEU, Dehradun</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- LEFT -->
+    <aside class="card sticky">
+      <h2>Navigation</h2>
+      <p class="muted">Each topic has <b>3 editable examples</b> (A/B/C). Click Run → see output.</p>
+
+      <div class="toc">
+        <a href="#plan">Hour-wise Plan</a>
+        <a href="#t1">1) HTML Skeleton + Comments</a>
+        <a href="#t2">2) Text Formatting + Entities</a>
+        <a href="#t3">3) Links + Navigation</a>
+        <a href="#t4">4) Lists + Images</a>
+        <a href="#t5">5) Tables</a>
+        <a href="#t6">6) Forms + Validation</a>
+        <a href="#t7">7) Meta Tags</a>
+        <a href="#t8">8) HTML5 Semantic Layout</a>
+        <a href="#t9">9) CSS Selectors + Types</a>
+        <a href="#t10">10) CSS Text + Fonts + Background</a>
+        <a href="#t11">11) Box Model</a>
+        <a href="#t12">12) Positioning</a>
+        <a href="#t13">13) Bootstrap Basics</a>
+        <a href="#project">Mini Project</a>
+      </div>
+
+      <div class="controls">
+        <button class="btn-primary" onclick="runAll()">Run All</button>
+        <button onclick="collapsePreviews()">Hide Previews</button>
+        <button onclick="showPreviews()">Show Previews</button>
+        <button onclick="window.print()">Print / Save PDF</button>
+      </div>
+
+      <div class="note">
+        <b>Class Tip:</b> After each example, ask students to modify 2 lines and re-run.
+      </div>
+
+      <div class="footer">
+        You can replace the GEU logo block with an actual image later.
+      </div>
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="card">
+
+      <h2 id="plan">Hour-wise Plan (8–10 hours)</h2>
+      <table>
+        <tr><th>Hour</th><th>Topics</th><th>Outcome</th></tr>
+        <tr><td>1</td><td>HTML skeleton, headings, paragraphs, comments</td><td>First page</td></tr>
+        <tr><td>2</td><td>Formatting, entities, links, navigation</td><td>Profile page</td></tr>
+        <tr><td>3</td><td>Lists + images</td><td>Mini site content</td></tr>
+        <tr><td>4</td><td>Tables + forms + validation</td><td>Registration page</td></tr>
+        <tr><td>5</td><td>Meta tags + semantics</td><td>Semantic layout</td></tr>
+        <tr><td>6</td><td>CSS basics + selectors</td><td>Styled UI</td></tr>
+        <tr><td>7</td><td>Text/fonts/background + box model</td><td>Card layouts</td></tr>
+        <tr><td>8</td><td>Positioning + Bootstrap</td><td>Responsive page</td></tr>
+        <tr><td>+1–2</td><td>Mini project + viva + polishing</td><td>Submission ready</td></tr>
+      </table>
+
+      <div class="ok">
+        <b>Deliverable:</b> Students submit a folder containing <code>index.html</code>, <code>css/style.css</code> and assets.
+      </div>
+
+      <!-- Helper: Topic builder (each has A/B/C editors) -->
+      <!-- TOPIC 1 -->
+      <section class="topic" id="t1">
+        <div class="topic-title">
+          <h3>1) HTML Skeleton + Comments</h3>
+          <div>
+            <span class="pill">3 Examples</span>
+            <span class="pill">Live Output</span>
+          </div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>HTML structure: <code>&lt;head&gt;</code> vs <code>&lt;body&gt;</code></li>
+            <li>Headings hierarchy: h1–h6</li>
+            <li>Comments and clean code</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t1','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t1','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t1','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t1-A">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GEU - My First Page</title>
+</head>
+<body>
+  <!-- Comment: This will not appear on the page -->
+  <h1>Welcome to HTML</h1>
+  <p>This is my first web page.</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t1-B">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Headings Demo</title>
+</head>
+<body>
+  <h1>H1 Heading</h1>
+  <h2>H2 Heading</h2>
+  <h3>H3 Heading</h3>
+  <p>Use headings in order for better structure.</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t1-C">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Card (Basic HTML)</title>
+</head>
+<body>
+  <h2>Student Profile</h2>
+  <p><b>Name:</b> ________</p>
+  <p><b>University:</b> Graphic Era University</p>
+  <p><b>Instructor:</b> Vijay Singh</p>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t1')">Run</button>
+              <button onclick="resetTopic('t1')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t1')">Clear</button>
+              <span class="muted">Try: change title, name, add <code>&lt;br&gt;</code>.</span>
+            </div>
+          </div>
+
+          <div class="preview" id="prevWrap-t1">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t1"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 2 -->
+      <section class="topic" id="t2">
+        <div class="topic-title">
+          <h3>2) Text Formatting + Character Entities</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Editable</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Formatting tags: <code>b</code>, <code>i</code>, <code>u</code>, <code>mark</code>, <code>small</code></li>
+            <li>Semantic formatting: <code>strong</code>, <code>em</code> (preferred)</li>
+            <li>Entities: &copy; &lt; &gt; &amp;</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t2','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t2','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t2','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t2-A">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Formatting</h2>
+  <p><b>Bold</b>, <i>Italic</i>, <u>Underline</u>, <mark>Highlight</mark>, <small>Small</small></p>
+  <p><strong>Strong</strong> and <em>Emphasis</em> are semantic.</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t2-B">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Entities</h2>
+  <p>Copyright: &copy; 2026 GEU</p>
+  <p>Less than: &lt; 10, Greater than: &gt; 5</p>
+  <p>Ampersand: Tom &amp; Jerry</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t2-C">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Paragraph + Line Break</h2>
+  <p>
+    This is line 1.<br>
+    This is line 2.<br>
+    This is line 3.
+  </p>
+  <p><small>Tip: Use CSS for spacing; use &lt;br&gt; for simple line breaks.</small></p>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t2')">Run</button>
+              <button onclick="resetTopic('t2')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t2')">Clear</button>
+              <span class="muted">Try: replace <code>b</code> with <code>strong</code>.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t2">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t2"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 3 -->
+      <section class="topic" id="t3">
+        <div class="topic-title">
+          <h3>3) Links + Navigation</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Practical</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li><code>&lt;a href&gt;</code> basics</li>
+            <li><code>target="_blank"</code> to open new tab</li>
+            <li>Internal links using <code>#section</code></li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t3','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t3','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t3','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t3-A">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Simple Navigation</h2>
+  <nav>
+    <a href="#">Home</a> |
+    <a href="#">About</a> |
+    <a href="#">Contact</a>
+  </nav>
+  <p>In real file structure, link: index.html, about.html, contact.html</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t3-B">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>External Link</h2>
+  <a href="https://developer.mozilla.org" target="_blank">Open MDN Web Docs</a>
+  <p><small>target="_blank" opens in new tab.</small></p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t3-C">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Internal Page Link (Anchor)</h2>
+  <a href="#end">Go to Bottom</a>
+
+  <p>Scroll down...</p>
+  <p style="height:180px;"></p>
+
+  <h3 id="end">Bottom Section</h3>
+  <a href="#">Back to Top</a>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t3')">Run</button>
+              <button onclick="resetTopic('t3')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t3')">Clear</button>
+              <span class="muted">Activity: create 3 files and connect them.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t3">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t3"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 4 -->
+      <section class="topic" id="t4">
+        <div class="topic-title">
+          <h3>4) Lists + Images</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Hands-on</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Ordered (<code>ol</code>) vs unordered (<code>ul</code>) lists</li>
+            <li>Image: <code>src</code>, <code>alt</code>, <code>width</code></li>
+            <li>Accessibility: why alt matters</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t4','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t4','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t4','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t4-A">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Skills (ul)</h2>
+  <ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>Bootstrap</li>
+  </ul>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t4-B">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Steps (ol)</h2>
+  <ol>
+    <li>Create file</li>
+    <li>Write tags</li>
+    <li>Open browser</li>
+  </ol>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t4-C">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Image with Alt</h2>
+  <img src="https://via.placeholder.com/280x140.png?text=GEU+Sample"
+       alt="GEU sample placeholder image" width="280">
+  <p><small>Try changing URL to wrong one and see alt usage.</small></p>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t4')">Run</button>
+              <button onclick="resetTopic('t4')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t4')">Clear</button>
+              <span class="muted">Try: add nested list under one item.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t4">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t4"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 5 -->
+      <section class="topic" id="t5">
+        <div class="topic-title">
+          <h3>5) Tables</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Data</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Table structure: rows and cells</li>
+            <li>Header cells (<code>th</code>) vs data cells (<code>td</code>)</li>
+            <li>Simple styling using border/cellpadding</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t5','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t5','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t5','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t5-A">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Marks Table</h2>
+  <table border="1" cellpadding="8">
+    <tr><th>Roll</th><th>Name</th><th>HTML</th><th>CSS</th></tr>
+    <tr><td>01</td><td>Aman</td><td>18</td><td>17</td></tr>
+    <tr><td>02</td><td>Riya</td><td>19</td><td>18</td></tr>
+  </table>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t5-B">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Time Table</h2>
+  <table border="1" cellpadding="8">
+    <tr><th>Day</th><th>9-10</th><th>10-11</th></tr>
+    <tr><td>Mon</td><td>HTML</td><td>CSS</td></tr>
+    <tr><td>Tue</td><td>Forms</td><td>Tables</td></tr>
+  </table>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t5-C">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Simple Styling with Inline CSS</h2>
+  <table border="1" cellpadding="8" style="border-collapse:collapse; width:100%;">
+    <tr style="background:#111827; color:white;">
+      <th>Event</th><th>Date</th><th>Venue</th>
+    </tr>
+    <tr><td>Workshop</td><td>15 Jan</td><td>Lab 6</td></tr>
+    <tr><td>Hackathon</td><td>20 Jan</td><td>Auditorium</td></tr>
+  </table>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t5')">Run</button>
+              <button onclick="resetTopic('t5')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t5')">Clear</button>
+              <span class="muted">Try: add one more row and change header color.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t5">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t5"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 6 -->
+      <section class="topic" id="t6">
+        <div class="topic-title">
+          <h3>6) Forms + HTML5 Validation</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Validation</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Inputs: text, email, password, date</li>
+            <li>Validation: required, minlength, pattern</li>
+            <li>Controls: radio, checkbox, select</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t6','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t6','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t6','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t6-A">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Basic Form</h2>
+  <form>
+    Name: <input type="text" required minlength="3"><br><br>
+    Email: <input type="email" required><br><br>
+    <button>Submit</button>
+  </form>
+  <p><small>Try submitting without name/email.</small></p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t6-B">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Form with Radio + Checkbox</h2>
+  <form>
+    Gender:
+    <input type="radio" name="g"> Male
+    <input type="radio" name="g"> Female
+    <input type="radio" name="g"> Other
+    <br><br>
+    Skills:
+    <input type="checkbox"> HTML
+    <input type="checkbox"> CSS
+    <input type="checkbox"> Bootstrap
+    <br><br>
+    <button>Submit</button>
+  </form>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t6-C">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Pattern Validation (Phone)</h2>
+  <form>
+    Phone (10 digits):
+    <input type="text" pattern="[0-9]{10}" placeholder="9999999999" required>
+    <button>Submit</button>
+  </form>
+  <p><small>Try entering letters or less digits.</small></p>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t6')">Run</button>
+              <button onclick="resetTopic('t6')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t6')">Clear</button>
+              <span class="muted">Explain: client-side validation vs server-side.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t6">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t6"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 7 -->
+      <section class="topic" id="t7">
+        <div class="topic-title">
+          <h3>7) Meta Tags</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Head Section</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>charset and viewport</li>
+            <li>description and keywords (concept)</li>
+            <li>title + favicon idea</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t7','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t7','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t7','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t7-A">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Demo A</title>
+</head>
+<body>
+  <h2>Meta charset + viewport</h2>
+  <p>Open DevTools → Elements → check head tags.</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t7-B">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="GEU Full Stack Unit-1 meta tag example">
+  <meta name="keywords" content="HTML,CSS,GEU,Full Stack">
+  <title>Meta Demo B</title>
+</head>
+<body>
+  <h2>Description + Keywords</h2>
+  <p>Explain how search engines read metadata (conceptually).</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t7-C">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Meta Demo C</title>
+</head>
+<body>
+  <h2>Title Demo</h2>
+  <p>Change the title and see the browser tab text.</p>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t7')">Run</button>
+              <button onclick="resetTopic('t7')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t7')">Clear</button>
+              <span class="muted">Try: edit the title and description.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t7">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t7"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 8 -->
+      <section class="topic" id="t8">
+        <div class="topic-title">
+          <h3>8) HTML5 Semantic Layout</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Structure</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Semantic tags and meaning</li>
+            <li>Basic structure of a webpage</li>
+            <li>Why semantics helps SEO & accessibility</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t8','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t8','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t8','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t8-A">
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial; margin:0;">
+<header style="background:#111827; color:#fff; padding:14px;">
+  <h2 style="margin:0;">GEU Department Portal</h2>
+  <nav style="margin-top:6px;">
+    <a href="#" style="color:#cbd5e1; margin-right:10px;">Home</a>
+    <a href="#" style="color:#cbd5e1; margin-right:10px;">Events</a>
+    <a href="#" style="color:#cbd5e1;">Contact</a>
+  </nav>
+</header>
+
+<main style="padding:14px;">
+  <section>
+    <h3>Announcements</h3>
+    <article style="border:1px solid #ddd; padding:10px; border-radius:10px;">
+      <h4 style="margin:0 0 6px;">Workshop</h4>
+      <p style="margin:0;">Unit-1 Hands-on Session</p>
+    </article>
+  </section>
+</main>
+
+<footer style="background:#f3f4f6; padding:10px; text-align:center;">
+  © 2026 GEU • Instructor: Vijay Singh
+</footer>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t8-B">
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial; padding:12px;">
+<header><h2>Blog Layout</h2></header>
+<main style="display:flex; gap:12px;">
+  <section style="flex:2;">
+    <article style="border:1px solid #ddd; padding:10px; border-radius:10px;">
+      <h3>Post 1</h3>
+      <p>Content...</p>
+    </article>
+  </section>
+  <aside style="flex:1; border:1px solid #ddd; padding:10px; border-radius:10px;">
+    <h3>Sidebar</h3>
+    <p>Links or notices</p>
+  </aside>
+</main>
+<footer><small>Footer info</small></footer>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t8-C">
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial; padding:12px;">
+<header><h2>Event Page (Semantics)</h2></header>
+<section>
+  <article>
+    <h3>Hackathon</h3>
+    <p>Date: 20 Jan | Venue: Auditorium</p>
+  </article>
+  <article>
+    <h3>Seminar</h3>
+    <p>Date: 25 Jan | Venue: Seminar Hall</p>
+  </article>
+</section>
+<footer><small>© GEU</small></footer>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t8')">Run</button>
+              <button onclick="resetTopic('t8')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t8')">Clear</button>
+              <span class="muted">Try: add one more article and style it.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t8">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t8"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 9 -->
+      <section class="topic" id="t9">
+        <div class="topic-title">
+          <h3>9) CSS Selectors + Types (Inline/Internal/External concept)</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">CSS</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Selectors: element, class, id</li>
+            <li>Inline vs internal vs external (recommended external)</li>
+            <li>Cascading: which style wins</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t9','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t9','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t9','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t9-A">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  h2 { color:#1d4ed8; }
+  .card{ border:1px solid #ddd; padding:10px; border-radius:10px; }
+  #special{ background:#fffbeb; border-color:#f59e0b; }
+</style>
+</head>
+<body>
+  <h2>Selectors Demo</h2>
+  <div class="card">Card using .card</div><br>
+  <div class="card" id="special">Card using .card + #special</div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t9-B">
+<!DOCTYPE html>
+<html>
+<body>
+  <h2 style="color:green;">Inline CSS Example</h2>
+  <p style="background:#eef2ff; padding:10px; border-radius:10px;">
+    Inline CSS is quick but not recommended for big projects.
+  </p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t9-C">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  p{ color:#374151; }
+  .blue{ color:#1d4ed8; font-weight:bold; }
+</style>
+</head>
+<body>
+  <p>This is normal paragraph.</p>
+  <p class="blue">This paragraph uses class selector.</p>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t9')">Run</button>
+              <button onclick="resetTopic('t9')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t9')">Clear</button>
+              <span class="muted">Try: add hover effect using <code>:hover</code>.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t9">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t9"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 10 -->
+      <section class="topic" id="t10">
+        <div class="topic-title">
+          <h3>10) CSS Text + Fonts + Background</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Styling</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>font-family, font-size, color, background</li>
+            <li>text-align, line-height</li>
+            <li>simple UI blocks</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t10','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t10','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t10','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t10-A">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family: Arial; background:#f6f7fb; padding:12px; }
+  .banner{ background:#111827; color:#fff; padding:14px; border-radius:12px; text-align:center; }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <h2>GEU Full Stack</h2>
+    <p>Instructor: Vijay Singh</p>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t10-B">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family: Georgia, serif; padding:12px; }
+  p{ font-size:16px; line-height:1.7; color:#374151; }
+  .hl{ color:#1d4ed8; font-weight:bold; }
+</style>
+</head>
+<body>
+  <h2>Typography Demo</h2>
+  <p>This text uses <span class="hl">font-family</span>, line-height and color.</p>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t10-C">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family: Arial; padding:12px; }
+  .card{ background:#fffbeb; border:1px solid #f59e0b; padding:12px; border-radius:12px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h3>Background & Color</h3>
+    <p>Change background color and see effect.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t10')">Run</button>
+              <button onclick="resetTopic('t10')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t10')">Clear</button>
+              <span class="muted">Try: set text-align left/right/center.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t10">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t10"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 11 -->
+      <section class="topic" id="t11">
+        <div class="topic-title">
+          <h3>11) Box Model (Margin, Padding, Border)</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Spacing</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Difference between margin and padding</li>
+            <li>border styles and radius</li>
+            <li>card design</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t11','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t11','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t11','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t11-A">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family:Arial; background:#f6f7fb; padding:12px; }
+  .box{ background:#fff; border:3px solid #1d4ed8; padding:16px; margin:16px; border-radius:14px; }
+</style>
+</head>
+<body>
+  <h2>Box Model</h2>
+  <div class="box">Increase/decrease padding and margin.</div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t11-B">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family:Arial; padding:12px; }
+  .box{ background:#fffbeb; border:3px dashed #f59e0b; padding:10px; margin:10px; border-radius:14px; }
+</style>
+</head>
+<body>
+  <div class="box">Try border-style: solid/dotted/double.</div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t11-C">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family:Arial; background:#f6f7fb; padding:12px; }
+  .card{ background:#fff; border:1px solid #ddd; padding:14px; border-radius:14px; margin:10px 0; }
+  .card:hover{ border-color:#1d4ed8; }
+</style>
+</head>
+<body>
+  <h2>Hover Effect</h2>
+  <div class="card">Hover me to change border color.</div>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t11')">Run</button>
+              <button onclick="resetTopic('t11')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t11')">Clear</button>
+              <span class="muted">Ask: Which one creates outside spacing?</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t11">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t11"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 12 -->
+      <section class="topic" id="t12">
+        <div class="topic-title">
+          <h3>12) CSS Positioning (relative/absolute)</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Layout</span></div>
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>Normal flow vs positioned elements</li>
+            <li>relative container + absolute child</li>
+            <li>use case: badges, notifications</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t12','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t12','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t12','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t12-A">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family:Arial; background:#f6f7fb; padding:12px; }
+  .container{ position:relative; background:#fff; border:1px solid #ddd; border-radius:14px; padding:12px; height:170px; }
+  .badge{ position:absolute; top:12px; right:12px; background:#16a34a; color:#fff; padding:4px 10px; border-radius:999px; font-size:12px; }
+</style>
+</head>
+<body>
+  <h2>Badge Position</h2>
+  <div class="container">
+    <div class="badge">NEW</div>
+    <h3>Card Title</h3>
+    <p>This badge is absolute inside a relative container.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t12-B">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family:Arial; padding:12px; }
+  .box{ position:relative; border:1px solid #ddd; border-radius:14px; padding:12px; height:160px; }
+  .dot{ position:absolute; bottom:12px; left:12px; width:14px; height:14px; background:#1d4ed8; border-radius:50%; }
+</style>
+</head>
+<body>
+  <h2>Bottom-left Absolute</h2>
+  <div class="box">
+    <p>Blue dot is positioned at bottom-left.</p>
+    <div class="dot"></div>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t12-C">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{ font-family:Arial; padding:12px; }
+  .relative{ position:relative; background:#fffbeb; border:1px solid #f59e0b; border-radius:14px; padding:14px; }
+  .tag{ position:absolute; top:-10px; left:12px; background:#f59e0b; color:#fff; padding:3px 10px; border-radius:999px; font-size:12px; }
+</style>
+</head>
+<body>
+  <h2>Tag Overlapping Box</h2>
+  <div class="relative">
+    <div class="tag">IMPORTANT</div>
+    <p>This shows overlapping using negative top.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t12')">Run</button>
+              <button onclick="resetTopic('t12')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t12')">Clear</button>
+              <span class="muted">Try: move badge to bottom-right.</span>
+            </div>
+          </div>
+          <div class="preview" id="prevWrap-t12">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t12"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPIC 13 -->
+      <section class="topic" id="t13">
+        <div class="topic-title">
+          <h3>13) Bootstrap Basics (CDN + Grid + Cards)</h3>
+          <div><span class="pill">3 Examples</span><span class="pill">Responsive</span></div>
+        </div>
+
+        <div class="warn">
+          <b>Bootstrap needs internet</b> to load CDN. Without internet, content will show but styles may not.
+        </div>
+
+        <details open>
+          <summary>Learning goals + Teaching points</summary>
+          <ul>
+            <li>CDN inclusion</li>
+            <li>Grid: container → row → columns</li>
+            <li>Cards + buttons</li>
+          </ul>
+        </details>
+
+        <div class="tabs">
+          <button class="btn-tab active" onclick="selectExample('t13','A')">Example A</button>
+          <button class="btn-tab" onclick="selectExample('t13','B')">Example B</button>
+          <button class="btn-tab" onclick="selectExample('t13','C')">Example C</button>
+        </div>
+
+        <div class="two">
+          <div>
+            <textarea class="code active" id="code-t13-A">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Bootstrap A</title>
+</head>
+<body>
+  <div class="container my-4">
+    <h2 class="mb-3">GEU Bootstrap Cards</h2>
+    <div class="row g-3">
+      <div class="col-12 col-md-4">
+        <div class="card"><div class="card-body">
+          <h5 class="card-title">HTML</h5>
+          <p class="card-text">Structure of web pages.</p>
+          <a href="#" class="btn btn-primary">Learn</a>
+        </div></div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card"><div class="card-body">
+          <h5 class="card-title">CSS</h5>
+          <p class="card-text">Styling and layout.</p>
+          <a href="#" class="btn btn-primary">Learn</a>
+        </div></div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card"><div class="card-body">
+          <h5 class="card-title">Bootstrap</h5>
+          <p class="card-text">Responsive design fast.</p>
+          <a href="#" class="btn btn-primary">Learn</a>
+        </div></div>
+      </div>
+    </div>
+    <p class="text-muted mt-3">Instructor: Vijay Singh</p>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t13-B">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Bootstrap B</title>
+</head>
+<body>
+  <div class="container my-4">
+    <div class="alert alert-success">Welcome to GEU Unit-1 Bootstrap Demo</div>
+    <button class="btn btn-danger">Danger Button</button>
+    <button class="btn btn-outline-primary">Outline Button</button>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <textarea class="code" id="code-t13-C">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Bootstrap C</title>
+</head>
+<body>
+  <div class="container my-4">
+    <h2>Grid Example</h2>
+    <div class="row">
+      <div class="col-12 col-md-6 p-2">
+        <div class="p-3 border rounded">Left column</div>
+      </div>
+      <div class="col-12 col-md-6 p-2">
+        <div class="p-3 border rounded">Right column</div>
+      </div>
+    </div>
+    <p class="text-muted">Resize window to see stacking on mobile.</p>
+  </div>
+</body>
+</html>
+            </textarea>
+
+            <div class="controls">
+              <button class="btn-primary" onclick="runTopic('t13')">Run</button>
+              <button onclick="resetTopic('t13')">Reset</button>
+              <button class="btn-danger" onclick="clearTopic('t13')">Clear</button>
+              <span class="muted">Try: change <code>col-md-4</code> → <code>col-md-6</code>.</span>
+            </div>
+          </div>
+
+          <div class="preview" id="prevWrap-t13">
+            <div class="preview-head"><span>Output Preview</span><span class="mini">Live</span></div>
+            <iframe id="prev-t13"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINI PROJECT -->
+      <section class="topic" id="project">
+        <div class="topic-title">
+          <h3>Mini Project (60–90 min): Portfolio / Department Club Page</h3>
+          <div><span class="pill">Assessment</span><span class="pill">Submission</span></div>
+        </div>
+
+        <div class="ok">
+          <b>Must include:</b>
+          <ul>
+            <li>Header + navigation (3 links)</li>
+            <li>At least 2 cards/articles</li>
+            <li>1 table (events/marks/schedule)</li>
+            <li>1 form (registration/contact) with validation</li>
+            <li>External CSS OR Bootstrap grid</li>
+            <li>Footer line: “Instructor: Vijay Singh”</li>
+          </ul>
+        </div>
+
+        <details>
+          <summary>Quick Viva (suggested)</summary>
+          <ol>
+            <li>Difference between <code>class</code> and <code>id</code>?</li>
+            <li>Why semantic HTML is useful?</li>
+            <li>Explain margin vs padding.</li>
+            <li>What is alt attribute and why important?</li>
+            <li>What is the role of viewport meta tag?</li>
+          </ol>
+        </details>
+
+        
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // Store default values for each textarea (for Reset)
+  const defaults = {};
+  const activeExample = {}; // topicId -> 'A'/'B'/'C'
+
+  function initDefaults() {
+    document.querySelectorAll("textarea.code").forEach(t => {
+      defaults[t.id] = t.value;
+    });
+
+    // initialize active examples per topic as A
+    const topics = new Set([...document.querySelectorAll("section.topic")].map(s => s.id));
+    topics.forEach(tid => activeExample[tid] = 'A');
+  }
+
+  function getActiveTextareaId(topicId){
+    const ex = activeExample[topicId] || 'A';
+    return `code-${topicId}-${ex}`;
+  }
+
+  function selectExample(topicId, ex){
+    activeExample[topicId] = ex;
+
+    // update tabs
+    const topic = document.getElementById(topicId);
+    if(!topic) return;
+
+    topic.querySelectorAll(".btn-tab").forEach(btn => btn.classList.remove("active"));
+    // The clicked button is the one that called this function. We'll mark matching by text:
+    topic.querySelectorAll(".btn-tab").forEach(btn => {
+      if(btn.textContent.trim().endsWith(ex)) btn.classList.add("active");
+      if(btn.textContent.trim() === `Example ${ex}`) btn.classList.add("active");
+    });
+
+    // show only active textarea
+    topic.querySelectorAll("textarea.code").forEach(ta => ta.classList.remove("active"));
+    const ta = document.getElementById(getActiveTextareaId(topicId));
+    if(ta) ta.classList.add("active");
+  }
+
+  function runTopic(topicId){
+    const taId = getActiveTextareaId(topicId);
+    const ta = document.getElementById(taId);
+    const fr = document.getElementById(`prev-${topicId}`);
+    if(!ta || !fr) return;
+    fr.srcdoc = ta.value;
+  }
+
+  function resetTopic(topicId){
+    const taId = getActiveTextareaId(topicId);
+    const ta = document.getElementById(taId);
+    if(!ta) return;
+    ta.value = defaults[taId] ?? ta.value;
+    runTopic(topicId);
+  }
+
+  function clearTopic(topicId){
+    const taId = getActiveTextareaId(topicId);
+    const ta = document.getElementById(taId);
+    if(!ta) return;
+    ta.value = "";
+    runTopic(topicId);
+  }
+
+  function runAll(){
+    // run all topics once using their currently active example
+    document.querySelectorAll("section.topic").forEach(sec => {
+      if(sec.id) runTopic(sec.id);
+    });
+  }
+
+  function collapsePreviews(){
+    document.querySelectorAll(".preview").forEach(p => p.style.display="none");
+  }
+
+  function showPreviews(){
+    document.querySelectorAll(".preview").forEach(p => p.style.display="block");
+  }
+
+  // init
+  initDefaults();
+  // Ensure each topic defaults to Example A visible
+  document.querySelectorAll("section.topic").forEach(sec => {
+    if(sec.id) selectExample(sec.id, 'A');
+  });
+  runAll();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Complete CSS Lab – Theory, Examples, Tasks & Quiz</title>
+
+<style>
+body{font-family:Segoe UI,Arial;background:#f3f6fb;margin:20px}
+h1{text-align:center;color:#0f2a44}
+.section{background:#ffffff;padding:20px;margin-bottom:25px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.08)}
+.theory{background:#eef6ff;padding:15px;border-left:6px solid #2563eb;border-radius:8px;margin-bottom:15px}
+.example{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:10px}
+textarea{width:100%;height:180px;font-family:Consolas,monospace;border-radius:8px;border:1px solid #cbd5e1;padding:10px;background:#f8fafc}
+iframe{width:100%;height:180px;border-radius:8px;border:1px solid #cbd5e1;background:#ffffff}
+.controls{margin-bottom:15px}
+button{padding:7px 14px;border:none;border-radius:6px;background:#2563eb;color:white;font-weight:500;cursor:pointer}
+button.reset{background:#64748b}
+.task{background:#fff7ed;padding:12px;border-left:6px solid #f97316;border-radius:8px;margin-top:10px}
+.quiz{background:#ecfeff;padding:15px;border-left:6px solid #06b6d4;border-radius:10px}
+</style>
+
+<script>
+function run(id){
+  document.getElementById("o"+id).srcdoc =
+  document.getElementById("c"+id).value;
+}
+function reset(id){
+  let t=document.getElementById("c"+id);
+  t.value=t.dataset.default;
+}
+function toggleTheory(){
+  document.querySelectorAll(".theory")
+  .forEach(t=>t.style.display=
+  t.style.display==="none"?"block":"none");
+}
+function checkQuiz(){
+  let s=0;
+  if(q1.value=="a")s++;
+  if(q2.value=="b")s++;
+  if(q3.value=="c")s++;
+  if(q4.value=="b")s++;
+  if(q5.value=="a")s++;
+  document.getElementById("qResult").innerHTML="Score: "+s+"/5";
+}
+</script>
+</head>
+
+<body>
+
+<h1>CSS Complete Lab Demonstration</h1>
+<button onclick="toggleTheory()">Toggle Teacher Mode</button>
+
+<!-- ================================================= -->
+<!-- 0. TYPES OF CSS -->
+<!-- ================================================= -->
+<div class="section">
+<h2>0. Types of CSS</h2>
+
+<div class="theory">
+<ul>
+<li>Inline CSS is written inside HTML tags</li>
+<li>Internal CSS is written inside &lt;style&gt;</li>
+<li>External CSS is written in a separate .css file</li>
+</ul>
+</div>
+
+<!-- Inline CSS -->
+<div class="example">
+<textarea id="c0" data-default="<!DOCTYPE html>
+<html>
+<body>
+<h2 style='color:red;text-align:center;'>Inline CSS Example</h2>
+</body>
+</html>">
+<!DOCTYPE html>
+<html>
+<body>
+<h2 style="color:red;text-align:center;">Inline CSS Example</h2>
+</body>
+</html>
+</textarea>
+<iframe id="o0"></iframe>
+</div>
+<div class="controls">
+<button onclick="run(0)">Run</button>
+<button class="reset" onclick="reset(0)">Reset</button>
+</div>
+
+<!-- Internal CSS -->
+<div class="example">
+<textarea id="c01" data-default="<!DOCTYPE html>
+<html>
+<head>
+<style>
+h2{color:blue;text-align:center;}
+</style>
+</head>
+<body>
+<h2>Internal CSS Example</h2>
+</body>
+</html>">
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h2{color:blue;text-align:center;}
+</style>
+</head>
+<body>
+<h2>Internal CSS Example</h2>
+</body>
+</html>
+</textarea>
+<iframe id="o01"></iframe>
+</div>
+<div class="controls">
+<button onclick="run('01')">Run</button>
+<button class="reset" onclick="reset('01')">Reset</button>
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- FROM HERE: EXAMPLES 1–24 (ALL COMPLETE HTML) -->
+<!-- ================================================= -->
+
+<!-- ================= SELECTORS ================= -->
+<div class="section">
+<h2>1. CSS Selectors</h2>
+
+<div class="example">
+<textarea id="c1" data-default="<!DOCTYPE html>
+<html>
+<head><style>p{color:blue;}</style></head>
+<body><p>Element Selector</p></body>
+</html>">
+<!DOCTYPE html>
+<html>
+<head><style>p{color:blue;}</style></head>
+<body><p>Element Selector</p></body>
+</html>
+</textarea>
+<iframe id="o1"></iframe>
+</div>
+<div class="controls"><button onclick="run(1)">Run</button><button class="reset" onclick="reset(1)">Reset</button></div>
+
+<div class="example">
+<textarea id="c2" data-default="<!DOCTYPE html>
+<html>
+<head><style>.demo{color:green;}</style></head>
+<body><p class='demo'>Class Selector</p></body>
+</html>">
+<!DOCTYPE html>
+<html>
+<head><style>.demo{color:green;}</style></head>
+<body><p class="demo">Class Selector</p></body>
+</html>
+</textarea>
+<iframe id="o2"></iframe>
+</div>
+<div class="controls"><button onclick="run(2)">Run</button><button class="reset" onclick="reset(2)">Reset</button></div>
+
+<div class="example">
+<textarea id="c3" data-default="<!DOCTYPE html>
+<html>
+<head><style>#one{color:red;}</style></head>
+<body><p id='one'>ID Selector</p></body>
+</html>">
+<!DOCTYPE html>
+<html>
+<head><style>#one{color:red;}</style></head>
+<body><p id="one">ID Selector</p></body>
+</html>
+</textarea>
+<iframe id="o3"></iframe>
+</div>
+<div class="controls"><button onclick="run(3)">Run</button><button class="reset" onclick="reset(3)">Reset</button></div>
+
+</div>
+
+
+
+<!-- ================= COLORS ================= -->
+<div class="section">
+<h2>2. Colors & Background</h2>
+<div class="theory"><ul><li>Color changes text color</li><li>Background-color fills element background</li><li>Enhances UI and readability</li></ul></div>
+
+<div class="example"><textarea id="c4" data-default="<style>p{color:purple}</style><p>Colored Text</p>"><style>p{color:purple}</style><p>Colored Text</p></textarea><iframe id="o4"></iframe></div>
+<div class="controls"><button onclick="run(4)">Run</button><button class="reset" onclick="reset(4)">Reset</button></div>
+
+<div class="example"><textarea id="c5" data-default="<style>div{background:#fde68a;padding:10px}</style><div>Background Color</div>"><style>div{background:#fde68a;padding:10px}</style><div>Background Color</div></textarea><iframe id="o5"></iframe></div>
+<div class="controls"><button onclick="run(5)">Run</button><button class="reset" onclick="reset(5)">Reset</button></div>
+
+<div class="example"><textarea id="c6" data-default="<style>body{background:#e0e7ff}</style><p>Page Background</p>"><style>body{background:#e0e7ff}</style><p>Page Background</p></textarea><iframe id="o6"></iframe></div>
+<div class="controls"><button onclick="run(6)">Run</button><button class="reset" onclick="reset(6)">Reset</button></div>
+
+<div class="task">Task: Use hex and RGB colors for background.</div>
+</div>
+
+<!-- ================= BOX MODEL ================= -->
+<div class="section">
+<h2>3. Box Model</h2>
+<div class="theory"><ul><li>Box model includes margin, border and padding</li><li>Controls spacing and layout</li><li>Essential for page design</li></ul></div>
+
+<div class="example"><textarea id="c7" data-default="<style>div{margin:20px;border:2px solid black;padding:10px}</style><div>Box Model</div>"><style>div{margin:20px;border:2px solid black;padding:10px}</style><div>Box Model</div></textarea><iframe id="o7"></iframe></div>
+<div class="controls"><button onclick="run(7)">Run</button><button class="reset" onclick="reset(7)">Reset</button></div>
+
+<div class="example"><textarea id="c8" data-default="<style>div{padding:25px;background:#bbf7d0}</style><div>Padding</div>"><style>div{padding:25px;background:#bbf7d0}</style><div>Padding</div></textarea><iframe id="o8"></iframe></div>
+<div class="controls"><button onclick="run(8)">Run</button><button class="reset" onclick="reset(8)">Reset</button></div>
+
+<div class="example"><textarea id="c9" data-default="<style>div{margin:30px;background:#fecaca}</style><div>Margin</div>"><style>div{margin:30px;background:#fecaca}</style><div>Margin</div></textarea><iframe id="o9"></iframe></div>
+<div class="controls"><button onclick="run(9)">Run</button><button class="reset" onclick="reset(9)">Reset</button></div>
+
+<div class="task">Task: Create a card layout using margin and padding.</div>
+</div>
+
+<!-- ================= TEXT ================= -->
+<div class="section">
+<h2>4. Text & Fonts</h2>
+<div class="theory"><ul><li>Controls text alignment, size and font</li><li>Improves readability</li><li>Enhances visual appearance</li></ul></div>
+
+<div class="example"><textarea id="c10" data-default="<style>p{text-align:center}</style><p>Centered Text</p>"><style>p{text-align:center}</style><p>Centered Text</p></textarea><iframe id="o10"></iframe></div>
+<div class="controls"><button onclick="run(10)">Run</button><button class="reset" onclick="reset(10)">Reset</button></div>
+
+<div class="example"><textarea id="c11" data-default="<style>p{font-size:24px}</style><p>Large Text</p>"><style>p{font-size:24px}</style><p>Large Text</p></textarea><iframe id="o11"></iframe></div>
+<div class="controls"><button onclick="run(11)">Run</button><button class="reset" onclick="reset(11)">Reset</button></div>
+
+<div class="example"><textarea id="c12" data-default="<style>p{font-family:Courier}</style><p>Monospace Font</p>"><style>p{font-family:Courier}</style><p>Monospace Font</p></textarea><iframe id="o12"></iframe></div>
+<div class="controls"><button onclick="run(12)">Run</button><button class="reset" onclick="reset(12)">Reset</button></div>
+
+<div class="task">Task: Apply different font families to headings.</div>
+</div>
+
+<!-- ================= QUIZ ================= -->
+<div class="section quiz">
+<h2>CSS Quiz</h2>
+<p>1. Which symbol is used for class selector?</p>
+<input type="radio" name="q1" value="a"> . <input type="radio" name="q1" value="b"> #
+<p>2. Which property sets background color?</p>
+<input type="radio" name="q2" value="a"> color <input type="radio" name="q2" value="b"> background-color
+<p>3. Box model includes?</p>
+<input type="radio" name="q3" value="a"> color <input type="radio" name="q3" value="b"> font <input type="radio" name="q3" value="c"> margin
+<p>4. Which property aligns text?</p>
+<input type="radio" name="q4" value="a"> font-size <input type="radio" name="q4" value="b"> text-align
+<p>5. Which property changes font?</p>
+<input type="radio" name="q5" value="a"> font-family <input type="radio" name="q5" value="b"> color
+<br><br><button onclick="checkQuiz()">Submit Quiz</button>
+<p id="qResult"></p>
+<!-- ================= POSITION ================= -->
+<div class="section">
+<h2>5. CSS Position</h2>
+<div class="theory"><ul><li>Position defines how an element is placed</li><li>Relative positions element relative to itself</li><li>Absolute positions relative to nearest positioned ancestor</li></ul></div>
+<div class="example"><textarea id="c13" data-default="<style>.box{position:relative;left:30px;background:#a5b4fc;padding:10px}</style><div class='box'>Relative Position</div>"><style>.box{position:relative;left:30px;background:#a5b4fc;padding:10px}</style><div class='box'>Relative Position</div></textarea><iframe id="o13"></iframe></div><div class="controls"><button onclick="run(13)">Run</button><button class="reset" onclick="reset(13)">Reset</button></div>
+<div class="example"><textarea id="c14" data-default="<style>.parent{position:relative;height:100px;border:1px solid}.child{position:absolute;right:10px;bottom:10px;background:#86efac}</style><div class='parent'><div class='child'>Absolute</div></div>"><style>.parent{position:relative;height:100px;border:1px solid}.child{position:absolute;right:10px;bottom:10px;background:#86efac}</style><div class='parent'><div class='child'>Absolute</div></div></textarea><iframe id="o14"></iframe></div><div class="controls"><button onclick="run(14)">Run</button><button class="reset" onclick="reset(14)">Reset</button></div>
+<div class="example"><textarea id="c15" data-default="<style>.fixed{position:fixed;bottom:10px;right:10px;background:#fecaca;padding:5px}</style><div class='fixed'>Fixed</div>"><style>.fixed{position:fixed;bottom:10px;right:10px;background:#fecaca;padding:5px}</style><div class='fixed'>Fixed</div></textarea><iframe id="o15"></iframe></div><div class="controls"><button onclick="run(15)">Run</button><button class="reset" onclick="reset(15)">Reset</button></div>
+<div class="task">Task: Create a fixed footer using position.</div>
+</div>
+
+<!-- ================= FLEXBOX ================= -->
+<div class="section">
+<h2>6. Flexbox</h2>
+<div class="theory"><ul><li>Flexbox provides one-dimensional layout</li><li>Aligns items horizontally or vertically</li><li>Simplifies responsive design</li></ul></div>
+<div class="example"><textarea id="c16" data-default="<style>.f{display:flex;gap:10px}.f div{background:#93c5fd;padding:10px}</style><div class='f'><div>A</div><div>B</div><div>C</div></div>"><style>.f{display:flex;gap:10px}.f div{background:#93c5fd;padding:10px}</style><div class='f'><div>A</div><div>B</div><div>C</div></div></textarea><iframe id="o16"></iframe></div><div class="controls"><button onclick="run(16)">Run</button><button class="reset" onclick="reset(16)">Reset</button></div>
+<div class="example"><textarea id="c17" data-default="<style>.f{display:flex;justify-content:space-between}.f div{background:#86efac;padding:10px}</style><div class='f'><div>1</div><div>2</div><div>3</div></div>"><style>.f{display:flex;justify-content:space-between}.f div{background:#86efac;padding:10px}</style><div class='f'><div>1</div><div>2</div><div>3</div></div></textarea><iframe id="o17"></iframe></div><div class="controls"><button onclick="run(17)">Run</button><button class="reset" onclick="reset(17)">Reset</button></div>
+<div class="example"><textarea id="c18" data-default="<style>.f{display:flex;align-items:center;height:100px;border:1px solid}.f div{background:#fde68a;padding:10px}</style><div class='f'><div>Center</div></div>"><style>.f{display:flex;align-items:center;height:100px;border:1px solid}.f div{background:#fde68a;padding:10px}</style><div class='f'><div>Center</div></div></textarea><iframe id="o18"></iframe></div><div class="controls"><button onclick="run(18)">Run</button><button class="reset" onclick="reset(18)">Reset</button></div>
+<div class="task">Task: Design a navigation bar using Flexbox.</div>
+</div>
+
+<!-- ================= GRID ================= -->
+<div class="section">
+<h2>7. CSS Grid</h2>
+<div class="theory"><ul><li>Grid provides two-dimensional layout</li><li>Rows and columns defined together</li><li>Ideal for page layouts</li></ul></div>
+<div class="example"><textarea id="c19" data-default="<style>.g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.g div{background:#bfdbfe;padding:10px}</style><div class='g'><div>1</div><div>2</div><div>3</div></div>"><style>.g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.g div{background:#bfdbfe;padding:10px}</style><div class='g'><div>1</div><div>2</div><div>3</div></div></textarea><iframe id="o19"></iframe></div><div class="controls"><button onclick="run(19)">Run</button><button class="reset" onclick="reset(19)">Reset</button></div>
+<div class="example"><textarea id="c20" data-default="<style>.g{display:grid;grid-template-columns:1fr 2fr}.g div{background:#86efac;padding:10px}</style><div class='g'><div>Left</div><div>Right</div></div>"><style>.g{display:grid;grid-template-columns:1fr 2fr}.g div{background:#86efac;padding:10px}</style><div class='g'><div>Left</div><div>Right</div></div></textarea><iframe id="o20"></iframe></div><div class="controls"><button onclick="run(20)">Run</button><button class="reset" onclick="reset(20)">Reset</button></div>
+<div class="example"><textarea id="c21" data-default="<style>.g{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:60px}.g div{background:#fecaca;padding:10px}</style><div class='g'><div>A</div><div>B</div><div>C</div></div>"><style>.g{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:60px}.g div{background:#fecaca;padding:10px}</style><div class='g'><div>A</div><div>B</div><div>C</div></div></textarea><iframe id="o21"></iframe></div><div class="controls"><button onclick="run(21)">Run</button><button class="reset" onclick="reset(21)">Reset</button></div>
+<div class="task">Task: Create a photo gallery using CSS Grid.</div>
+</div>
+
+<!-- ================= ANIMATION ================= -->
+<div class="section">
+<h2>8. CSS Animation & Transition</h2>
+<div class="theory"><ul><li>Transitions animate property changes</li><li>Animations use keyframes</li><li>Enhance user interaction</li></ul></div>
+<div class="example"><textarea id="c22" data-default="<style>.box{width:100px;height:50px;background:#93c5fd;transition:0.5s}.box:hover{width:200px}</style><div class='box'></div>"><style>.box{width:100px;height:50px;background:#93c5fd;transition:0.5s}.box:hover{width:200px}</style><div class='box'></div></textarea><iframe id="o22"></iframe></div><div class="controls"><button onclick="run(22)">Run</button><button class="reset" onclick="reset(22)">Reset</button></div>
+<div class="example"><textarea id="c23" data-default="<style>@keyframes move{from{left:0}to{left:100px}}.box{position:relative;width:50px;height:50px;background:#fca5a5;animation:move 2s infinite alternate}</style><div class='box'></div>"><style>@keyframes move{from{left:0}to{left:100px}}.box{position:relative;width:50px;height:50px;background:#fca5a5;animation:move 2s infinite alternate}</style><div class='box'></div></textarea><iframe id="o23"></iframe></div><div class="controls"><button onclick="run(23)">Run</button><button class="reset" onclick="reset(23)">Reset</button></div>
+<div class="example"><textarea id="c24" data-default="<style>@keyframes fade{0%{opacity:0}100%{opacity:1}}p{animation:fade 2s}</style><p>Fade In Text</p>"><style>@keyframes fade{0%{opacity:0}100%{opacity:1}}p{animation:fade 2s}</style><p>Fade In Text</p></textarea><iframe id="o24"></iframe></div><div class="controls"><button onclick="run(24)">Run</button><button class="reset" onclick="reset(24)">Reset</button></div>
+<div class="task">Task: Create a button hover animation.</div>
+</div>
+
+</div>
+
+</body>
+</html>
