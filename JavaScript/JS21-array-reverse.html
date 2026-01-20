@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reverse and Sort Array</title>
+</head>
+<body>
+
+<h2>Reverse and Sort an Array</h2>
+
+<label>Enter array elements (comma separated):</label><br><br>
+<input type="text" id="arrayInput" placeholder="e.g. 5,3,1,4,2"><br><br>
+
+<button onclick="reverseArray()">Reverse Array</button>
+<button onclick="sortArray()">Sort Array</button>
+
+<p id="output"></p>
+
+<script>
+function getArray() {
+    let input = document.getElementById("arrayInput").value;
+    return input.split(",").map(Number); // convert to numeric array
+}
+
+function reverseArray() {
+    let arr = getArray();
+    let reversedArray = [...arr].reverse(); // copy before reversing
+    document.getElementById("output").innerHTML =
+        "Reversed Array: " + reversedArray.join(", ");
+}
+
+function sortArray() {
+    let arr = getArray();
+    let sortedArray = [...arr].sort((a, b) => a - b); // ascending order
+    document.getElementById("output").innerHTML =
+        "Sorted Array: " + sortedArray.join(", ");
+}
+</script>
+
+</body>
+</html>

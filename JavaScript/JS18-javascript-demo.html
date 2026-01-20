@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Basic Functionalities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            color: rgb(248, 6, 6);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: medium;
+            background-color: bisque;
+
+        }
+        #output {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>JavaScript Basic Functionalities Demonstration</h2>
+
+<!-- Alert -->
+<button onclick="showAlert()">Show Alert</button>
+
+<!-- Prompt -->
+<button onclick="showPrompt()">Enter Name</button>
+
+<!-- Confirm -->
+<button onclick="showConfirm()">Confirm Action</button>
+
+<!-- Arithmetic -->
+<button onclick="calculate()">Add Numbers</button>
+
+<!-- Loop -->
+<button onclick="showLoop()">Show Loop</button>
+
+<!-- Date -->
+<button onclick="showDate()">Show Date & Time</button>
+
+<div id="output">Output will appear here</div>
+
+<script>
+    // Variable Declaration
+    let message = "Welcome to JavaScript Lab";
+
+    // Alert Box
+    function showAlert() {
+        alert(message);
+    }
+
+    // Prompt Box
+    function showPrompt() {
+        let name = prompt("Enter your name:");
+        if (name !== null) {
+            document.getElementById("output").innerHTML = "Hello, " + name;
+        }
+    }
+
+    // Confirm Box
+    function showConfirm() {
+        let result = confirm("Do you want to continue?");
+        if (result) {
+            document.getElementById("output").innerHTML = "User clicked OK";
+        } else {
+            document.getElementById("output").innerHTML = "User clicked Cancel";
+        }
+    }
+
+    // Arithmetic Operation
+    function calculate() {
+        let a = 10;
+        let b = 5;
+        let sum = a + b;
+        document.getElementById("output").innerHTML = 
+            "Addition of " + a + " and " + b + " is " + sum;
+    }
+
+    // Loop Demonstration
+    function showLoop() {
+        let text = "";
+        for (let i = 1; i <= 5; i++) {
+            text += "Number: " + i + "<br>";
+        }
+        document.getElementById("output").innerHTML = text;
+    }
+
+    // Date and Time
+    function showDate() {
+        let today = new Date();
+        document.getElementById("output").innerHTML = today;
+    }
+</script>
+
+</body>
+</html>
