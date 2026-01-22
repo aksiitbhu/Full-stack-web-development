@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Objects – Complete Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+        .box {
+            padding: 15px;
+            border: 1px solid #333;
+            margin-top: 10px;
+        }
+        button {
+            padding: 6px 12px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>JavaScript Objects Demonstration</h2>
+
+<button onclick="showObjectLiteral()">Object Literal</button>
+<button onclick="showNestedObject()">Nested Object</button>
+<button onclick="showMethodObject()">Function in Object</button>
+<button onclick="showConstructorObject()">Constructor Object</button>
+<button onclick="showClassObject()">Class & Object</button>
+<button onclick="webDesignExample1()">Dark Theme</button>
+<button onclick="webDesignExample2()">Light Theme</button>
+
+<div id="output" class="box"></div>
+
+<script>
+/* 1. Object Literal */
+function showObjectLiteral() {
+    let student = {
+        name: "Amit",
+        roll: 101,
+        course: "CSE"
+    };
+
+    document.getElementById("output").innerHTML =
+        "<b>Object Literal</b><br>" +
+        "Name: " + student.name + "<br>" +
+        "Roll: " + student.roll + "<br>" +
+        "Course: " + student.course;
+}
+
+/* 2. Nested Object */
+function showNestedObject() {
+    let student = {
+        name: "Amit",
+        roll: 101,
+        address: {
+            city: "Dehradun",
+            state: "Uttarakhand"
+        }
+    };
+
+    document.getElementById("output").innerHTML =
+        "<b>Nested Object</b><br>" +
+        "Name: " + student.name + "<br>" +
+        "City: " + student.address.city + "<br>" +
+        "State: " + student.address.state;
+}
+
+/* 3. Function (Method) in Object */
+function showMethodObject() {
+    let student = {
+        name: "Amit",
+        greet: function() {
+            return "Hello, my name is " + this.name;
+        }
+    };
+
+    document.getElementById("output").innerHTML =
+        "<b>Function inside Object</b><br>" +
+        student.greet();
+}
+
+/* 4. Constructor Function */
+function showConstructorObject() {
+    function Car(brand, year) {
+        this.brand = brand;
+        this.year = year;
+    }
+
+    let car1 = new Car("Toyota", 2022);
+
+    document.getElementById("output").innerHTML =
+        "<b>Constructor Function Object</b><br>" +
+        "Brand: " + car1.brand + "<br>" +
+        "Year: " + car1.year;
+}
+
+/* 5. Class and Object Creation */
+function showClassObject() {
+    class Student {
+        constructor(name, course) {
+            this.name = name;
+            this.course = course;
+        }
+
+        details() {
+            return this.name + " studies " + this.course;
+        }
+    }
+
+    let s1 = new Student("Amit", "CSE");
+
+    document.getElementById("output").innerHTML =
+        "<b>Class & Object</b><br>" +
+        s1.details();
+}
+
+/* 6. Object in Web Designing (DOM + CSS) */
+
+
+// Real-world use: Website Theme Object
+let themes = {
+    light: {
+        backgroundColor: "yellow",
+        color: "#000000",
+        fontFamily: "Arial",
+        padding: "20px"
+    },
+    dark: {
+        backgroundColor: "brown",
+        color: "#ffffff",
+        fontFamily: "Verdana",
+        padding: "20px"
+    }
+};
+function webDesignExample1() {
+let box = document.getElementById("output");
+
+// Apply Dark Theme (can be changed to light)
+let selectedTheme = themes.dark;
+
+box.innerHTML =
+    "<b>Dark Theme Applied</b><br>" +
+    "This is a real-world web designing example where<br>" +
+    "CSS themes are stored and applied using JavaScript objects.";
+
+// Applying CSS using object properties
+for (let property in selectedTheme) {
+    box.style[property] = selectedTheme[property];
+}
+}
+
+
+function webDesignExample2() {
+let box = document.getElementById("output");
+
+// Apply Dark Theme (can be changed to light)
+let selectedTheme = themes.light;
+
+box.innerHTML =
+    "<b>Dark Theme Applied</b><br>" +
+    "This is a real-world web designing example where<br>" +
+    "CSS themes are stored and applied using JavaScript objects.";
+
+// Applying CSS using object properties
+for (let property in selectedTheme) {
+    box.style[property] = selectedTheme[property];
+}
+}
+
+
+</script>
+
+</body>
+</html>

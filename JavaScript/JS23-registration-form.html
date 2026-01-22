@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 12px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background-color: green;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: red;
+            color: white;
+        }
+
+        .btn-refresh {
+            background-color: blue;
+            color: white;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Event Registration</h2>
+
+    <label>Full Name:</label>
+    <input type="text" id="name">
+
+    <label>Email:</label>
+    <input type="email" id="email">
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dob">
+
+    <label>Gender:</label>
+    <select id="gender">
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+    <label>Event Type:</label>
+    <select id="event">
+        <option value="">Select</option>
+        <option>Workshop</option>
+        <option>Seminar</option>
+        <option>Conference</option>
+    </select>
+
+    <button class="btn-submit" onclick="submitForm()">Submit</button>
+    <button class="btn-cancel" onclick="cancelForm()">Cancel</button>
+    <button class="btn-refresh" onclick="refreshForm()">Refresh</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+function calculateAge(dob) {
+    let birthDate = new Date(dob);
+    let today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+function submitForm() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let dob = document.getElementById("dob").value;
+    let gender = document.getElementById("gender").value;
+    let event = document.getElementById("event").value;
+
+    if (name === "" || email === "" || dob === "" || gender === "" || event === "") {
+        document.getElementById("result").innerHTML = "All fields are required!";
+        return;
+    }
+
+    let age = calculateAge(dob);
+
+    if (age < 18) {
+        document.getElementById("result").innerHTML =
+            "Age must be 18 or above. Your age is " + age;
+        return;
+    }
+
+    document.getElementById("result").innerHTML =
+        "Registration Successful! Age: " + age;
+}
+
+function cancelForm() {
+    document.getElementById("result").innerHTML =
+        "Registration Cancelled";
+}
+
+function refreshForm() {
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("dob").value = "";
+    document.getElementById("gender").value = "";
+    document.getElementById("event").value = "";
+    document.getElementById("result").innerHTML = "";
+}
+</script>
+
+</body>
+</html>

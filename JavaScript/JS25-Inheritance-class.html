@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Class Inheritance Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+        .box {
+            border: 1px solid #333;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 12px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Inheritance in JavaScript (Class-based)</h2>
+
+<button onclick="showUser()">Show User</button>
+<button onclick="showAdmin()">Show Admin</button>
+
+<div id="output" class="box"></div>
+
+<script>
+/* Parent Class */
+class User {
+    constructor(name, email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    getDetails() {
+        return "Name: " + this.name + "<br>Email: " + this.email;
+    }
+}
+
+/* Child Class inheriting User */
+class Admin extends User {
+    constructor(name, email, role) {
+        super(name, email); // call parent constructor
+        this.role = role;
+    }
+
+    getAdminDetails() {
+        return this.getDetails() + "<br>Role: " + this.role;
+    }
+}
+
+/* Object Creation */
+function showUser() {
+    let user1 = new User("Amit", "amit@gmail.com");
+
+    document.getElementById("output").innerHTML =
+        "<b>User Object</b><br>" +
+        user1.getDetails();
+}
+
+function showAdmin() {
+    let admin1 = new Admin("Neha", "neha@gmail.com", "System Administrator");
+
+    document.getElementById("output").innerHTML =
+        "<b>Admin Object (Inherited)</b><br>" +
+        admin1.getAdminDetails();
+}
+</script>
+
+</body>
+</html>
