@@ -1,0 +1,16 @@
+Password:
+<input type="password" id="pwd" onkeyup="checkStrength()">
+<p id="strength"></p>
+<script>
+function checkStrength() {
+let pwd = document.getElementById("pwd").value;
+let strength = "Weak";
+if (pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) {
+strength = "Strong";
+} else if (pwd.length >= 6) {
+strength = "Medium";
+}
+document.getElementById("strength").innerHTML =
+"Password Strength: " + strength;
+}
+</script>

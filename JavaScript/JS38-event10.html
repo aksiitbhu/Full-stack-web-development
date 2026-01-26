@@ -1,0 +1,10 @@
+
+<textarea id="msg" rows="4" cols="30" onkeyup="countChar()"></textarea>
+<p id="count">Characters: 0</p>
+<script>
+function countChar() {
+let text = document.getElementById("msg").value;
+document.getElementById("count").innerHTML =
+"Characters: " + text.length;
+}
+</script>

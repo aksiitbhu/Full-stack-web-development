@@ -1,0 +1,10 @@
+Allows users to toggle password visibility for better usability.
+Password:
+<input type="password" id="pass">
+<input type="checkbox" onclick="toggle()"> Show Password
+<script>
+function toggle() {
+let p = document.getElementById("pass");
+p.type = (p.type === "password") ? "text" : "password";
+}
+</script>

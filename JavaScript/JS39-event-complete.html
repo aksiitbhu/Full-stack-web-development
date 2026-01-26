@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Event Handling Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    section {
+      border: 2px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    #box {
+      width: 200px;
+      height: 100px;
+      background-color: lightblue;
+      text-align: center;
+      line-height: 100px;
+      margin-top: 10px;
+    }
+    .outer {
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+    .inner {
+      padding: 20px;
+      background-color: #d9edf7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Event Handling in JavaScript – Demo</h1>
+
+  <!-- Mouse Events -->
+  <section>
+    <h2>1. Mouse Events</h2>
+    <button id="clickBtn">Click Me</button>
+    <button id="dblClickBtn">Double Click Me</button>
+    <div id="box">Hover Me</div>
+  </section>
+
+  <!-- Keyboard Events -->
+  <section>
+    <h2>2. Keyboard Events</h2>
+    <input type="text" id="keyInput" placeholder="Type something">
+    <p id="keyOutput"></p>
+  </section>
+
+  <!-- Form Events -->
+  <section>
+    <h2>3. Form Events</h2>
+    <form id="myForm">
+      <input type="text" id="name" placeholder="Enter name" required>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Window Events -->
+  <section>
+    <h2>4. Window Events</h2>
+    <p>Resize the window or reload the page</p>
+  </section>
+
+  <!-- Event Object -->
+  <section>
+    <h2>5. Event Object</h2>
+    <button id="eventBtn">Show Event Details</button>
+  </section>
+
+  <!-- Bubbling & Capturing -->
+  <section>
+    <h2>6. Event Bubbling & Capturing</h2>
+    <div class="outer" id="outer">
+      Outer Div
+      <div class="inner" id="inner">
+        Inner Div (Click Me)
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* 1. Mouse Events */
+    document.getElementById("clickBtn").addEventListener("click", function () {
+      alert("Button Clicked");
+    });
+
+    document.getElementById("dblClickBtn").addEventListener("dblclick", function () {
+      alert("Button Double Clicked");
+    });
+
+    document.getElementById("box").addEventListener("mouseover", function () {
+      this.style.backgroundColor = "orange";
+      this.textContent = "Mouse Over";
+    });
+
+    document.getElementById("box").addEventListener("mouseout", function () {
+      this.style.backgroundColor = "lightblue";
+      this.textContent = "Hover Me";
+    });
+
+    /* 2. Keyboard Events */
+    document.getElementById("keyInput").addEventListener("keyup", function (event) {
+      document.getElementById("keyOutput").textContent =
+        "You pressed: " + event.key;
+    });
+
+    /* 3. Form Events */
+    document.getElementById("myForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // stop form submission
+      alert("Form Submitted Successfully!");
+    });
+
+    /* 4. Window Events */
+    window.addEventListener("load", function () {
+      console.log("Page Loaded");
+    });
+
+    window.addEventListener("resize", function () {
+      console.log("Window Resized");
+    });
+
+    /* 5. Event Object */
+    document.getElementById("eventBtn").addEventListener("click", function (event) {
+      alert(
+        "Event Type: " + event.type +
+        "\nTarget Element: " + event.target.tagName
+      );
+    });
+
+    /* 6. Event Bubbling */
+    document.getElementById("outer").addEventListener("click", function () {
+      alert("Outer DIV clicked (Bubbling)");
+    });
+
+    document.getElementById("inner").addEventListener("click", function () {
+      alert("Inner DIV clicked (Bubbling)");
+    });
+
+    /* 7. Event Capturing */
+    document.getElementById("outer").addEventListener(
+      "click",
+      function () {
+        console.log("Outer DIV clicked (Capturing)");
+      },
+      true
+    );
+  </script>
+
+</body>
+</html>

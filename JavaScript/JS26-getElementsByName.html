@@ -1,0 +1,13 @@
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<button onclick="showGender()">Submit</button>
+<script>
+function showGender() {
+var g = document.getElementsByName("gender");
+for (var i = 0; i < g.length; i++) {
+if (g[i].checked) {
+alert(g[i].value);
+}
+}
+}
+</script>
