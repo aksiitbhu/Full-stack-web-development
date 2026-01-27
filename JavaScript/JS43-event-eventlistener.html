@@ -1,0 +1,21 @@
+<html>
+<head>
+   <title>Click Event Example</title>
+</head>
+<body>
+   <p> Click the button below to perform an event </p>
+   <button id="myButton">Click Me</button>
+
+   <script>
+      // Get the button element
+      const button = document.getElementById("myButton");
+      // Define the event handler function
+      function handleClick() {
+         alert("Button clicked!");
+      }
+      // Attach the event listener to the button
+      button.addEventListener("click", handleClick);
+   </script>
+
+</body>
+</html>

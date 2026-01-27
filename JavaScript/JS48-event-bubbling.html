@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+		.parent {
+			width: 600px;
+			height: 200px;
+			background-color: #eee;
+			position: relative;
+			cursor: pointer;
+			}
+
+		.child {
+			width: 400px;
+			height: 100px;
+			background-color: #66c2ff;
+			position: absolute;
+			top: 50px;
+			left: 50px;
+		}
+		#message {
+			margin-top: 10px;
+			font-weight: bold;
+		}
+    
+	</style>
+</head>
+<body>
+	<h2>Nested Divs</h2>
+	<div class="parent" id="parentDiv">
+		<div class="child" id="childDiv">Click me!</div>
+	</div>
+	<div id="message"></div>
+	<script>
+		let messageElement = document.getElementById('message');
+
+		document.getElementById('parentDiv').addEventListener('click', function () {
+			messageElement.innerHTML+='Parent div clicked<br>';
+		});
+
+		document.getElementById('childDiv').addEventListener('click', function () {
+			messageElement.innerHTML+='Child div clicked<br>';
+		});
+	</script>
+</body>
+</html>

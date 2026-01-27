@@ -1,0 +1,15 @@
+<head>
+   <title>Double Click Event Example</title>
+</head>
+<body>
+   <button id="doubleClickButton">Double-click me!</button>
+   <p id = "output"></p>
+   <script>
+      const doubleClickButton = document.getElementById('doubleClickButton');
+      const outputDiv = document.getElementById("output");
+      doubleClickButton.addEventListener('dblclick', function(event) {
+         outputDiv.innerHTML += 'Double-clicked!' + JSON.stringify(event) + "<br>";
+      });
+   </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+   <h3>Type a character</h3>
+   <div id="output"></div>
+   <script>
+      document.addEventListener('keypress', function (event) {
+         document.getElementById('output').innerHTML = 
+         "Character pressed: " + event.key;
+      });
+   </script>   
+</body>
+</html>
