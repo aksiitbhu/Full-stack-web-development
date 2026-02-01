@@ -1,0 +1,26 @@
+<html>
+<body>
+  <h3> Location Information </h3>
+  <button onclick = "findLocation()"> Find Location </button>
+  <p id = "output"> </p> 
+  <script>
+    const output = document.getElementById("output");
+    function findLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getCords); //
+      }
+      else {
+        output.innerHTML += "Geo Location is not supported by this browser!";
+      }
+    }
+    // Callback function
+    function getCords(coords) {
+      output.innerHTML += "The current position is: <br>";
+      output.innerHTML += "Latitude: " + coords.coords.latitude + "<br>";
+      output.innerHTML += "Longitude: " + coords.coords.longitude + "<br>";
+      output.innerHTML += "Accuracy: " + coords.coords.accuracy + "<br>";
+      output.innerHTML += "Altitude: " + coords.coords.altitude + "<br>";
+    }  
+  </script>
+</body>
+</html>

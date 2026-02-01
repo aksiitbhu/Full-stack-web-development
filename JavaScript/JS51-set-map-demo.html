@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Maps and Sets Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7ff;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .box {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #217dbb;
+    }
+    pre {
+      background: #222;
+      color: #00ff88;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Maps and Sets in JavaScript (Demo)</h1>
+
+  <div class="box">
+    <h2>Set Demo (Unique Values)</h2>
+    <button onclick="runSetDemo()">Run Set Demo</button>
+    <pre id="setOutput">Output will appear here...</pre>
+  </div>
+
+  <div class="box">
+    <h2>Map Demo (Key-Value Pairs)</h2>
+    <button onclick="runMapDemo()">Run Map Demo</button>
+    <pre id="mapOutput">Output will appear here...</pre>
+  </div>
+
+  <script>
+    function runSetDemo() {
+      let output = "";
+
+      let arr = [1, 2, 2, 3, 4, 4, 5];
+      output += "Original Array: " + JSON.stringify(arr) + "\n\n";
+
+      let uniqueSet = new Set(arr);
+      output += "Set created from array (duplicates removed):\n";
+      output += JSON.stringify([...uniqueSet]) + "\n\n";
+
+      uniqueSet.add(10);
+      uniqueSet.add(3); // duplicate ignored
+      output += "After adding 10 and trying to add duplicate 3:\n";
+      output += JSON.stringify([...uniqueSet]) + "\n\n";
+
+      output += "Does set have 4? " + uniqueSet.has(4) + "\n";
+      output += "Size of set: " + uniqueSet.size + "\n";
+
+      document.getElementById("setOutput").textContent = output;
+    }
+
+    function runMapDemo() {
+      let output = "";
+
+      let marks = new Map();
+      marks.set("Math", 90);
+      marks.set("JavaScript", 95);
+      marks.set("DBMS", 88);
+
+      output += "Map entries:\n";
+      for (let [subject, score] of marks) {
+        output += subject + " => " + score + "\n";
+      }
+
+      output += "\nGet JavaScript marks: " + marks.get("JavaScript") + "\n";
+      output += "Map size: " + marks.size + "\n";
+
+      // Frequency count demo
+      let words = ["js", "java", "js", "python", "js", "java"];
+      let freq = new Map();
+
+      for (let w of words) {
+        freq.set(w, (freq.get(w) || 0) + 1);
+      }
+
+      output += "\nWord Frequency using Map:\n";
+      for (let [word, count] of freq) {
+        output += word + " => " + count + "\n";
+      }
+
+      document.getElementById("mapOutput").textContent = output;
+    }
+  </script>
+
+</body>
+</html>
