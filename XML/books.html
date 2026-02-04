@@ -1,0 +1,21 @@
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var text, parser, xmlDoc;
+
+fetch("book.xml")
+        .then(response => response.text())
+        .then(xmlText => {
+          // Convert XML string to XML DOM
+          let parser = new DOMParser();
+
+xmlDoc = parser.parseFromString(xmlText,"text/xml");
+let books = xmlDoc.getElementsByTagName("book");
+console.log(books);
+</script>
+
+</body>
+</html>
