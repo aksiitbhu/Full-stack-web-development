@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XMLHttpRequest Multiple Data Types</title>
+    <style>
+        body { font-family: Arial; text-align: center; }
+        button { margin: 5px; padding: 8px; }
+        #output { margin-top: 20px; border: 1px solid black; padding: 15px; width: 60%; margin-left: auto; margin-right: auto;}
+    </style>
+</head>
+<body>
+
+<h2>XMLHttpRequest Demo (Text, XML, JSON, HTML)</h2>
+
+<button onclick="loadText()">Load Text</button>
+<button onclick="loadHTML()">Load HTML</button>
+<button onclick="loadXML()">Load XML</button>
+<button onclick="loadJSON()">Load JSON</button>
+
+<div id="output"></div>
+
+<script>
+
+// Load Text
+function loadText() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("output").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "message.txt", true);
+    xhttp.send();
+}
+
+// Load HTML
+function loadHTML() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("output").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "info.html", true);
+    xhttp.send();
+}
+
+// Load XML
+function loadXML() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var xmlDoc = this.responseXML;
+            var students1 = xmlDoc.getElementsByTagName("student");
+
+            var result = "<h3>XML Data</h3>";
+            for (var i = 0; i < students1.length; i++) {
+                result += students1[i].getElementsByTagName("name")[0].childNodes[0].nodeValue + " - ";
+                result += students1[i].getElementsByTagName("branch")[0].childNodes[0].nodeValue + "<br>";
+            }
+
+            document.getElementById("output").innerHTML = result;
+        }
+    };
+    xhttp.open("GET", "students1.xml", true);
+    xhttp.send();
+}
+
+// Load JSON
+function loadJSON() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var data = JSON.parse(this.responseText);
+            var result = "<h3>JSON Data</h3>";
+
+            for (var i = 0; i < data.students.length; i++) {
+                result += data.students[i].name + " - " + data.students[i].branch + "<br>";
+            }
+
+            document.getElementById("output").innerHTML = result;
+        }
+    };
+    xhttp.open("GET", "data.json", true);
+    xhttp.send();
+}
+
+</script>
+
+</body>
+</html>

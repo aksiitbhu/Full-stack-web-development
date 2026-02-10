@@ -1,0 +1,2 @@
+Welcome to Web Technology Class.
+XMLHttpRequest loads this text without refreshing page.

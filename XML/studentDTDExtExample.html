@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XML Demo</title>
+</head>
+<body>
+
+  <h2>Read XML(with External DTD) using JavaScript</h2>
+  <button onclick="loadXML()">Load XML Data</button>
+
+  <div id="output"></div>
+
+  <script>
+    function loadXML() {
+      fetch("studentDTDExt.xml")
+        .then(response => response.text())
+        .then(xmlText => {
+          let parser = new DOMParser();
+          let xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+          let students = xmlDoc.getElementsByTagName("student");
+          let output = "";
+
+          for (let i = 0; i < students.length; i++) {
+            let id = students[i].getElementsByTagName("id")[0].textContent;
+            let name = students[i].getElementsByTagName("name")[0].textContent;
+            let age = students[i].getElementsByTagName("age")[0].textContent;
+            let addr = students[i].getElementsByTagName("addr")[0].textContent;
+            let email = students[i].getElementsByTagName("email")[0].textContent;
+            
+            
+
+            output += `<p><b>Id:</b> ${id} |<b>Name:</b> ${name} |<b>Age:</b> ${age} |<b>Address:</b> ${addr} | <b>Email:</b> ${email}</p>`;
+          }
+
+          document.getElementById("output").innerHTML = output;
+        })
+        .catch(error => console.log("Error:", error));
+    }
+  </script>
+
+</body>
+</html>

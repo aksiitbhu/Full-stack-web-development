@@ -1,0 +1,6 @@
+{
+  "students": [
+    { "name": "Priya", "branch": "ECE" },
+    { "name": "Aman", "branch": "ME" }
+  ]
+}

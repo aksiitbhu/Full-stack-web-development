@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <name>Ashwini</name>
+        <branch>CSE</branch>
+        <year>3rd</year>
+    </student>
+    <student>
+        <name>Rahul</name>
+        <branch>IT</branch>
+        <year>2nd</year>
+    </student>
+</students>

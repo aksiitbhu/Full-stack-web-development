@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Load HTML using XHR</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+        #content {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid black;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>XMLHttpRequest - Load HTML Task</h2>
+
+<button onclick="loadContent()">Load Department Info</button>
+
+<div id="content"></div>
+
+<script>
+function loadContent() {
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("content").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "info.html", true);
+    xhttp.send();
+}
+</script>
+
+</body>
+</html>
