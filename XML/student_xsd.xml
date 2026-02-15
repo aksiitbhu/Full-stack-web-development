@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="students_xsd1.xsd">
+
+    <student rollNo="101">
+        <name>Amit</name>
+        
+        <age>20</age>
+        <course>B.Tech</course>
+        <email>aksabc.com</email>
+    </student>
+
+    <student rollNo="102">
+   
+        <name>Riya</name>
+         <age>21</age>
+        <course>BCA</course>
+        <email>riya@gmail.com</email>
+    </student>
+
+</students>
